@@ -22,7 +22,7 @@
       </div>
   
       
-      <form *ngIf="isSignup" class="signup-form">
+      <!-- <form *ngIf="isSignup" class="signup-form" (ngSubmit)="Register()">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>First Name</mat-label>
           <input matInput required />
@@ -47,10 +47,43 @@
           </button>
         </mat-form-field>
   
-        <button mat-flat-button color="warn" class="signup-btn">Signup</button>
-      </form>
+        <button mat-flat-button color="warn" class="signup-btn" type="submit">Signup</button>
+      </form> -->
 
-      <form *ngIf="!isSignup" class="signup-form">
+      <form *ngIf="isSignup" [formGroup]="RegisterForm" (ngSubmit)="Register()" class="signup-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstname" required />
+          <mat-error *ngIf="RegisterForm.get('firstname')?.invalid">Enter First name</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname" required />
+            <mat-error *ngIf="RegisterForm.get('lastname')?.invalid">Enter Last name</mat-error>
+          </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required />
+          <button mat-icon-button matSuffix (click)="togglePassword()" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      
+        
+      
+        <button mat-flat-button color="warn" class="signup-btn" type="submit">Signup</button>
+      </form>
+      
+
+
+      <!-- <form *ngIf="!isSignup" class="signup-form" (ngSubmit)="Login()">
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput required />
@@ -68,7 +101,7 @@
           <a routerLink="/forgot">Forgot Password?</a>
         </div>
       
-        <button mat-flat-button color="warn" class="signup-btn">Login</button>
+        <button mat-flat-button color="warn" class="signup-btn" type="submit">Login</button>
         <div class="or-separator">
             <span>OR</span>
           </div>
@@ -76,8 +109,39 @@
           <button mat-stroked-button class="facebook-btn">Facebook</button>
           <button mat-stroked-button class="google-btn">Google</button>
         </div>
-      </form>
+      </form> -->
       
+      <form *ngIf="!isSignup" [formGroup]="loginForm" (ngSubmit)="Login()" class="signup-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required />
+          <button mat-icon-button matSuffix (click)="togglePassword()" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      
+        <div class="forgot-password">
+          <a routerLink="/forgot">Forgot Password?</a>
+        </div>
+      
+        <button mat-flat-button color="warn" class="signup-btn" type="submit" >Login</button>
+      
+        <div class="or-separator">
+          <span>OR</span>
+        </div>
+      
+        <div class="social-buttons">
+          <button mat-stroked-button class="facebook-btn">Facebook</button>
+          <button mat-stroked-button class="google-btn">Google</button>
+        </div>
+       
+          
+      </form>
       
 
     </div>
