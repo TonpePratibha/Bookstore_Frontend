@@ -1,1 +1,130 @@
-<p>dashboard works!</p>
+<!-- <mat-toolbar color="primary" class="header-toolbar">
+    
+    <span class="logo"><mat-icon>menu_book</mat-icon> Bookstore</span>
+    <div class="search-wrapper">
+    <div class="search-bar">
+        <mat-icon>search</mat-icon>
+        <input type="text" placeholder="Search"  />
+      </div>
+    </div>
+  
+    
+  <div class=".header-buttons">
+    <button mat-button class="icon-button" (click)="OnLogout()">
+      <mat-icon >person</mat-icon> Profile
+      <span class="logout-text" *ngIf="showLogoutText">Logout</span>
+    </button>
+    <button mat-button class="icon-button">
+      <mat-icon>shopping_cart</mat-icon>Cart
+    </button>
+    </div>
+  </mat-toolbar>
+  
+
+  <div class="bookscontainer">
+  <div class="books-header">
+    <div class="books-title">Books {{booksArray.length}}</div>
+  
+    <mat-form-field appearance="fill" class="sort-dropdown">
+      <mat-label>Sort by</mat-label>
+      <mat-select [(value)]="sortOption">
+        <mat-option value="relevance">Relevance</mat-option>
+        <mat-option value="priceLowHigh">Price: Low to High</mat-option>
+        <mat-option value="priceHighLow">Price: High to Low</mat-option>
+        <mat-option value="newest">Newest First</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+  
+  <div class="book-grid">
+    <div class="book-card" *ngFor="let book of pagedBooks">
+      <div class="book-image">
+        <img [src]="book.bookImage" alt="Book Image" />
+      </div>
+      <div class="book-details">
+        <h3 class="book-title">{{ book.bookName }}</h3>
+        <p class="book-author">by {{ book.author }}</p>
+        <p class="book-price">₹{{ book.price }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="paginator-wrapper">
+<mat-paginator
+  [length]="booksArray.length"
+  [pageSize]="8"
+  [pageSizeOptions]="[4, 8, 16]"
+  (page)="onPageChange($event)">
+</mat-paginator>
+</div>
+
+
+<footer class="footer">
+    <div class="footer-content">
+      <span>© 2025, Bookstore Private Limited. All Rights Reserved</span>
+    </div>
+  </footer>
+  
+ -->
+
+ <mat-toolbar color="primary" class="header-toolbar">
+  <span class="logo"><mat-icon>menu_book</mat-icon> Bookstore</span>
+  <div class="search-wrapper">
+    <div class="search-bar">
+      <mat-icon>search</mat-icon>
+      <input type="text" [(ngModel)]="searchQuery" (input)="searchBooks()" placeholder="Search" />
+    </div>
+  </div>
+  <div class=".header-buttons">
+    <button mat-button class="icon-button" (click)="OnLogout()">
+      <mat-icon>person</mat-icon> Profile
+      <span class="logout-text" *ngIf="showLogoutText">Logout</span>
+    </button>
+    <button mat-button class="icon-button">
+      <mat-icon>shopping_cart</mat-icon>Cart
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- Display the books -->
+<div class="bookscontainer">
+  <div class="books-header">
+    <div class="books-title">Books:{{ booksArray.length }}</div>
+    <mat-form-field appearance="fill" class="sort-dropdown">
+      <mat-label>Sort by</mat-label>
+      <mat-select [(value)]="sortOption" (selectionChange)="sortBooks()">
+        <mat-option value="relevance">Relevance</mat-option>
+        <mat-option value="priceLowHigh">Price: Low to High</mat-option>
+        <mat-option value="priceHighLow">Price: High to Low</mat-option>
+        <mat-option value="newest">Newest First</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="book-grid">
+    <div class="book-card" *ngFor="let book of pagedBooks">
+      <div class="book-image">
+        <img [src]="book.bookImage" alt="Book Image" />
+      </div>
+      <div class="book-details">
+        <h3 class="book-title">{{ book.bookName }}</h3>
+        <p class="book-author">by {{ book.author }}</p>
+        <p class="book-price">₹{{ book.price }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<mat-paginator
+  [length]="totalBooks"
+  [pageSize]="8"
+  [pageSizeOptions]="[4, 8, 16]"
+  (page)="onPageChange($event)">
+</mat-paginator>
+<footer class="footer">
+  <div class="footer-content">
+    <span>© 2025, Bookstore Private Limited. All Rights Reserved</span>
+  </div>
+</footer>

@@ -106,6 +106,7 @@ export class RegisterloginComponent  implements OnInit{
           panelClass: ['success-snackbar']
         });
       },
+      
       error: (err) => {
         console.error("Registration Failed:", err);
       }

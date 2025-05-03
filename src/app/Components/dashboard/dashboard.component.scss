@@ -1,0 +1,246 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+  }
+  
+  .header-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    background-color: #a52a2a;
+    color: white;
+  }
+  
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 20px;
+    padding-left: 6%;
+    
+  }
+  
+.search-wrapper {
+    flex: 1;
+    display: flex;
+    //justify-content: center;
+    padding-left: 9%;
+    max-width: 700px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f3f4;
+    border-radius: 8px;
+    padding: 0 16px;
+    
+    height: 48px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px rgba(60, 64, 67, 0.15);
+  
+    mat-icon {
+      color: #5f6368;
+      margin-right: 12px;
+      font-size: 24px;
+    }
+  
+    input {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      flex: 1;
+      background: transparent;
+      color: #202124;
+      
+    }
+  }
+  
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .icon-button {
+    color: white !important;
+    padding-right: 6%;
+    
+    
+   
+  }
+ 
+  
+  .header-buttons {
+    display: flex;
+    gap: 20px; /* spacing between buttons */
+    margin-left: auto; /* pushes buttons to the right */
+    align-items: center;
+    size: 20%;
+  }
+  
+  
+
+  
+  
+
+  .booksdata{
+    height:84%;
+  }
+  
+ 
+
+.footer {   
+position: relative;
+bottom: 0;
+width: 100%;
+left: 0px;
+text-align: center;
+display: flex;
+height: 50px;
+
+background: #2E1D1E 0% 0% no-repeat padding-box;
+opacity: 1;
+overflow-x: hidden;
+  }
+  
+  .footer-content {
+   
+    font-size: 14px;
+    color: aliceblue;
+    text-align: center;
+
+  }
+
+.bookscontainer{
+  padding-left: 100px;
+  padding-right: 40px;
+  
+}
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    
+    padding: 15px;
+   
+     
+  }
+  
+  .book-card {
+    width: 270px;     // or any smaller width
+    height: 300px; 
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+  
+    &:hover {
+      transform: scale(1.03);
+    }
+  
+    .book-image {
+      height: 200px;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    }
+  
+    .book-details {
+      padding: 12px;
+  
+      .book-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 4px;
+      }
+  
+      .book-author {
+        font-size: 14px;
+        color: #666;
+        margin: 0 0 6px;
+      }
+  
+      .book-price {
+        font-size: 16px;
+        color: #a52a2a;
+        font-weight: 700;
+        margin: 0;
+      }
+    }
+  }
+  
+  .books-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
+  
+  .books-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .sort-dropdown {
+    width: 200px;
+  }
+  
+  ::ng-deep .mat-paginator {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    width: fit-content;
+    background-color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  ::ng-deep .mat-paginator-range-label {
+    margin: 0 10px;
+  }
+  
+  ::ng-deep .mat-paginator-icon {
+    color: #333;
+  }
+  
+  ::ng-deep .mat-paginator-page-size {
+    margin-right: 16px;
+  }
+  
+  ::ng-deep .mat-form-field-infix {
+    border: none !important;
+  }
+  
+  ::ng-deep .mat-paginator .mat-button-base {
+    color: #6200ea; /* your primary theme color */
+  }
+  
+  ::ng-deep .mat-paginator .mat-button-base:hover {
+    background-color: #f1f1f1;
+  }
+  .paginator-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  

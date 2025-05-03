@@ -14,13 +14,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { provideHttpClient } from '@angular/common/http';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { BookdetailsComponent } from './Components/bookdetails/bookdetails.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterloginComponent,
     ForgotPasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    BookdetailsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -31,7 +40,14 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     MatInputModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatPaginatorModule,
+    FormsModule
+
   ],
   providers: [
     provideClientHydration(withEventReplay()),
