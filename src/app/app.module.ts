@@ -22,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { BookdetailsComponent } from './Components/bookdetails/bookdetails.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { BookdetailsComponent } from './Components/bookdetails/bookdetails.compo
     ForgotPasswordComponent,
     DashboardComponent,
     BookdetailsComponent,
+ 
     
   ],
   imports: [

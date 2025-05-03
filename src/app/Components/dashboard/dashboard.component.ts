@@ -175,10 +175,46 @@ export class DashboardComponent implements OnInit {
     this.setPagedBooks();
   }
 
-  setPagedBooks(filteredBooks: any[] = this.booksArray) {
-    const start = this.currentPage * this.pageSize;
-    const end = start + this.pageSize;
-    this.pagedBooks = filteredBooks.slice(start, end);
-    console.log(`Paged Books:`, this.pagedBooks);
+  // setPagedBooks(filteredBooks: any[] = this.booksArray) {
+  //   const start = this.currentPage * this.pageSize;
+  //   const end = start + this.pageSize;
+  //   this.pagedBooks = filteredBooks.slice(start, end);
+  //   console.log(`Paged Books:`, this.pagedBooks);
+  // }
+
+  //
+  maxPage = 0;
+
+setPagedBooks(filteredBooks: any[] = this.booksArray) {
+  const start = this.currentPage * this.pageSize;
+  const end = start + this.pageSize;
+  this.pagedBooks = filteredBooks.slice(start, end);
+
+  this.totalBooks = filteredBooks.length;
+  this.maxPage = Math.ceil(this.totalBooks / this.pageSize);
+}
+
+goToPage(pageIndex: number) {
+  this.currentPage = pageIndex;
+  this.setPagedBooks();
+}
+
+goToPreviousPage() {
+  if (this.currentPage > 0) {
+    this.currentPage--;
+    this.setPagedBooks();
   }
+}
+
+goToNextPage() {
+  if (this.currentPage < this.maxPage - 1) {
+    this.currentPage++;
+    this.setPagedBooks();
+  }
+}
+
+getPageNumbers(): number[] {
+  return Array(this.maxPage).fill(0).map((_, i) => i);
+}
+
 }

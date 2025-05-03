@@ -64,10 +64,15 @@ export class RegisterloginComponent  implements OnInit{
       password: this.loginForm.value.password
     };
   
+    
+
     this.user.Login(reqData).subscribe(
       (res: any) => {
+        let token = res.response.token;
         console.log('Login Success:', res);
-        localStorage.setItem("token", res.token);
+        localStorage.setItem("token", token);
+        console.log("token", token);
+
         this.router.navigate(['/dashboard']);
         this.snackbar.open('Login Successful!', 'Close', {
           duration: 1000,

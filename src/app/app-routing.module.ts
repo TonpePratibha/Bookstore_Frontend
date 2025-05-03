@@ -4,12 +4,18 @@ import { RegisterloginComponent } from './Components/registerlogin/registerlogin
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { BookdetailsComponent } from './Components/bookdetails/bookdetails.component';
+import { authGuard } from './Components/auth.guard';
 
 const routes: Routes = [
   {path:'registerlogin', component:RegisterloginComponent},
   {path:'forgot', component:ForgotPasswordComponent},
-  {path:'dashboard',component:DashboardComponent},
-  {path:'bookdetails',component:BookdetailsComponent},
+  {path:'dashboard',component:DashboardComponent, canActivate:[authGuard],
+    children:[
+      {path:'bookdetails',component:BookdetailsComponent}
+    ]
+    
+  }
+  
 
 ];
 
