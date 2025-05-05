@@ -21,6 +21,11 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { BookdetailsComponent } from './Components/bookdetails/bookdetails.component';
+import { BooksdataComponent } from './Components/booksdata/booksdata.component';
+import { CartComponent } from './Components/cart/cart.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { OrderComponent } from './Components/order/order.component';
+import { WishlistComponent } from './Components/wishlist/wishlist.component';
 
 
 @NgModule({
@@ -30,6 +35,10 @@ import { BookdetailsComponent } from './Components/bookdetails/bookdetails.compo
     ForgotPasswordComponent,
     DashboardComponent,
     BookdetailsComponent,
+    BooksdataComponent,
+  CartComponent,
+  OrderComponent,
+  WishlistComponent
  
     
   ],
@@ -48,7 +57,8 @@ import { BookdetailsComponent } from './Components/bookdetails/bookdetails.compo
     MatSelectModule,
     MatOptionModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatBadgeModule
 
   ],
   providers: [

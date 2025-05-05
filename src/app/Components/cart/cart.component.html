@@ -1,0 +1,85 @@
+<!-- <div class="cart-container">
+    <div class="breadcrumb">Home / <span>My cart</span></div>
+  
+    <div class="cart-box">
+      <h2>My cart (1)</h2>
+      
+      <div class="cart-item" >
+        <img src="images/book4.png" alt="Book" class="book-img" />
+  
+        <div class="item-details">
+          <h3>Don't Make Me Think</h3>
+          <p>by Steve Krug</p>
+          <div class="price">
+            <span class="current-price">Rs. 1500</span>
+            <span class="original-price">Rs. 2000</span>
+          </div>
+          <div class="quantity-control">
+            <button>-</button>
+            <span>1</span>
+            <button>+</button>
+            <a href="#" class="remove">Remove</a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="location">
+        <label>
+          <input type="checkbox" checked />
+          Use current location
+        </label>
+      </div>
+  
+      <button class="place-order">PLACE ORDER</button>
+    </div>
+  
+    <div class="accordion-section">
+      <div class="accordion">Address Details</div>
+      <div class="accordion">Order summary</div>
+    </div>
+  </div>
+   -->
+   <div class="cart-container">
+    <div class="breadcrumb">Home / <span>My cart</span></div>
+  
+    <div class="cart-box">
+      <h2>My cart ({{ totalQuantity }})</h2>
+  
+      <!-- Dynamically list all cart items -->
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <img [src]="item.bookImage || 'images/book4.png'" alt="Book" class="book-img" />
+  
+        <div class="item-details">
+          <h3>{{ item.bookName }}</h3>
+          <p>by {{ item.author }}</p>
+          <div class="price">
+            <span class="current-price">Rs. {{ item.price }}</span>
+            <span class="original-price">Rs. {{ item.originalPrice || item.price + 500 }}</span>
+          </div>
+          <div class="quantity-control">
+            <button (click)="decreaseQuantity(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQuantity(item)">+</button>
+            <!-- <a href="#" class="remove">Remove</a> -->
+          </div>
+        </div>
+      </div>
+  
+      <!-- Location & Place Order -->
+      <div class="location">
+        <label>
+          <input type="checkbox" checked />
+          Use current location
+        </label>
+      </div>
+  
+      <button class="place-order">PLACE ORDER</button>
+    </div>
+  
+    <!-- Accordion Section -->
+    <div class="accordion-section">
+      <div class="accordion">Address Details</div>
+      <div class="accordion">Order summary</div>
+    </div>
+  </div>
+  

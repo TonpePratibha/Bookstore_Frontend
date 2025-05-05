@@ -26,4 +26,14 @@ export class BookService {
     return this.http.getService("https://localhost:7264/api/books",false,headers);
   }
 
+
+  getBookById(id:number){
+    let headers={
+      headers:new HttpHeaders({
+        'Content-Type':'application/json',
+      })
+    };
+    return this.http.getService(`https://localhost:7264/api/books/${id}`,false,headers)
+  }
+
 }

@@ -5,13 +5,20 @@ import { ForgotPasswordComponent } from './Components/forgot-password/forgot-pas
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { BookdetailsComponent } from './Components/bookdetails/bookdetails.component';
 import { authGuard } from './Components/auth.guard';
+import { BooksdataComponent } from './Components/booksdata/booksdata.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'registerlogin', pathMatch: 'full' },
   {path:'registerlogin', component:RegisterloginComponent},
   {path:'forgot', component:ForgotPasswordComponent},
+ 
   {path:'dashboard',component:DashboardComponent, canActivate:[authGuard],
     children:[
-      {path:'bookdetails',component:BookdetailsComponent}
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {path:'home', component:BooksdataComponent},
+     {path:'bookdetails/:id',component:BookdetailsComponent},
+     {path:'cart', component:CartComponent},
     ]
     
   }

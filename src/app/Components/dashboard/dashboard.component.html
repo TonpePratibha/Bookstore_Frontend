@@ -4,7 +4,7 @@
   <div class="main-content">
     <!-- HEADER -->
     <mat-toolbar color="primary" class="header-toolbar">
-      <span class="logo"><mat-icon>menu_book</mat-icon> Bookstore</span>
+      <span class="logo" routerLink="/dashboard/home"><mat-icon>menu_book</mat-icon> Bookstore</span>
       <div class="search-wrapper">
         <div class="search-bar">
           <mat-icon>search</mat-icon>
@@ -12,10 +12,7 @@
         </div>
       </div>
       <div class="header-buttons">
-        <!-- <button mat-button class="icon-button" (click)="OnLogout()">
-          <mat-icon>person</mat-icon> Profile
-          <span class="logout-text" *ngIf="showLogoutText">Logout</span>
-        </button> -->
+       
 
         <div class="profile-wrapper" (mouseenter)="showLogoutText = true" (mouseleave)="showLogoutText = false">
           <button mat-button class="icon-button" (click)="OnLogout()">
@@ -25,68 +22,23 @@
             Logout
           </div>
         </div>
-        
-        <button mat-button class="icon-button">
-          <mat-icon>shopping_cart</mat-icon>Cart
-        </button>
+      
+        <button
+  mat-button
+  class="icon-button white-badge"
+  [matBadge]="cartCount"
+  [matBadgeHidden]="cartCount === 0"
+  matBadgeOverlap="false" 
+  routerLink="/dashboard/cart">
+  <mat-icon>shopping_cart</mat-icon>Cart
+</button>
+
       </div>
     </mat-toolbar>
 
-    <!-- BOOKS SECTION -->
-    <div class="bookscontainer">
-      <div class="books-header">
-        <!-- <div class="books-title">Books: {{ booksArray.length }}</div> -->
-        <div class="books-title">
-          Books<span class="books-count">({{ booksArray.length }})</span>
-        </div>
-        
-        <mat-form-field appearance="outline" class="sort-dropdown">
-          <mat-label>Sort by</mat-label>
-          <mat-select [(value)]="sortOption" (selectionChange)="sortBooks()">
-            <mat-option value="relevance">Relevance</mat-option>
-            <mat-option value="priceLowHigh">Price: Low to High</mat-option>
-            <mat-option value="priceHighLow">Price: High to Low</mat-option>
-            <mat-option value="newest">Newest First</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
 
-      <!-- BOOK CARDS -->
-      <div class="book-grid">
-        <div class="book-card" *ngFor="let book of pagedBooks">
-          <div class="book-image">
-            <img [src]="book.bookImage" alt="Book Image" />
-          </div>
-          <div class="book-details">
-            <h3 class="book-title">{{ book.bookName }}</h3>
-            <p class="book-author">by {{ book.author }}</p>
-            <div class="rating-box">
-              <span class="rating-number">4.5</span>
-              <span class="star-icon">&#9733;</span>
-            </div>
-            <p class="book-price">Rs {{ book.price }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- PAGINATION -->
-    <div class="paginator-wrapper">
-      <div class="pagination-container">
-        <button class="arrow-btn" [disabled]="currentPage === 0" (click)="goToPreviousPage()">&lt;</button>
-
-        <button
-          class="page-btn"
-          *ngFor="let page of getPageNumbers(); let i = index"
-          [class.active]="currentPage === i"
-          (click)="goToPage(i)">
-          {{ i + 1 }}
-        </button>
-
-        <button class="arrow-btn" [disabled]="currentPage >= maxPage - 1" (click)="goToNextPage()">&gt;</button>
-      </div>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 
   <!-- FOOTER -->
   <footer class="footer">

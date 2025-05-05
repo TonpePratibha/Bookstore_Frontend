@@ -1,1 +1,80 @@
-<p>bookdetails works!</p>
+
+
+<div class="book-details-wrapper">
+    <!-- Book Image Section -->
+    <div class="left-section">
+      <div class="main-image">
+        <img [src]="book.bookImage" alt="Book Image" />
+      </div>
+      <!-- <div class="action-buttons">
+         <button class="add-bag">ADD TO BAG</button> 
+        <div *ngIf="!isAddedToBag">
+          <button (click)="addToBag()" class="add-bag">ADD TO BAG</button>
+        </div>
+        <div *ngIf="isAddedToBag" class="quantity-section">
+          <button (click)="decreaseQuantity()">−</button>
+          <span>{{ quantity }}</span>
+          <button (click)="increaseQuantity()">+</button>
+        </div>
+        
+        
+        <button class="wishlist">WISHLIST</button>
+      </div> -->
+      
+
+      <div class="action-buttons">
+        <!-- Toggle between Add to Bag and Quantity -->
+        <ng-container *ngIf="!isAddedToBag; else quantityBlock">
+          <button class="add-bag" (click)="addToBag()">ADD TO BAG</button>
+        </ng-container>
+      
+        <!-- Quantity Section (same space as add-bag) -->
+        <ng-template #quantityBlock>
+          <div class="quantity-section">
+            <button (click)="decreaseQuantity()">−</button>
+            <span>{{ quantity }}</span>
+            <button (click)="increaseQuantity()">+</button>
+          </div>
+        </ng-template>
+      
+        <!-- Wishlist stays the same -->
+        <button class="wishlist">WISHLIST</button>
+      </div>
+      
+    </div>
+  
+    <!-- Book Info Section -->
+    <div class="right-section">
+      <h2 class="book-title">{{ book.bookName }}</h2>
+      <p class="book-author">by {{ book.author }}</p>
+  
+      <div class="rating-price">
+        <span class="rating">
+          4.5 <mat-icon>star</mat-icon> 
+        </span>
+        <div class="price">
+          <span class="current-price">₹{{ book.price }}</span>
+          <span class="original-price">₹{{ book.originalPrice }}</span>
+        </div>
+      </div>
+  
+      <div class="book-description">
+        <h4>*Book Detail</h4>
+        <p>{{ book.description }}</p>
+      </div>
+  
+      <div class="feedback-section">
+        <h4>Customer Feedback</h4>
+        <mat-form-field appearance="fill" class="rating-field">
+          <mat-label>Overall Rating</mat-label>
+          <mat-select [(value)]="rating">
+            <mat-option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{ r }} Stars</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <textarea placeholder="Write your review"></textarea>
+        <button class="submit-review">Submit</button>
+      </div>
+    </div>
+  </div>
+  

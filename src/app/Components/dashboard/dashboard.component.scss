@@ -7,6 +7,7 @@ html, body {
   padding: 0;
   height: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body {
@@ -93,6 +94,12 @@ body {
 
 .icon-button {
   color: white !important;
+}
+::ng-deep .white-badge .mat-badge-content {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid #ccc;
+  font-weight: bold;
 }
 
 /* Books layout */
@@ -336,6 +343,7 @@ body {
     justify-content: center;
   }
 }
+
 .profile-wrapper {
   position: relative;
   display: inline-block;
