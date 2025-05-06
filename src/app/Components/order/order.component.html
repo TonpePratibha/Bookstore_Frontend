@@ -1,1 +1,27 @@
-<p>order works!</p>
+<div class="order-page">
+    <div class="order-header">
+      <h2>My Orders</h2>
+      <p>All your previous orders are listed here.</p>
+    </div>
+
+    <div class="order-list">
+      <div class="order-card" *ngFor="let order of ordersArray">
+        <div class="book-image">
+          <img [src]="order.bookImage" alt="Book cover" />
+        </div>
+        <div class="book-details">
+          <h3>{{ order.bookName }}</h3>
+          <p class="author">by {{ order.author }}</p>
+          <p class="quantity">{{ order.quantity }}</p>
+          <p class="price">
+            Rs. {{ order.totalPrice }}
+            <span class="original-price">Rs. {{ order.originalPrice }}</span>
+          </p>
+        </div>
+        <div class="order-date">
+          <p class="placed-on">✔ Order Placed on {{ order.placedDate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

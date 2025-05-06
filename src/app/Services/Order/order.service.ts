@@ -6,11 +6,45 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrderService {
+token:any;
+  constructor(private http:HttpService) { 
+this.token=localStorage.getItem("token");
+  }
 
-  constructor(private http:HttpService) { }
+
+  placeOrder(){
+   
+      let headers = {
+        headers: new HttpHeaders({ 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`
+        })
+      };
+       
+      return this.http.PostService("https://localhost:7264/api/orders/placeorder",null,true, headers);
+    }
 
 
-  PlaceOrder(){
+    addCustomerDetails(reqData:any){
+      let headers = {
+        headers: new HttpHeaders({ 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`
+        })
+      };
+       
+      return this.http.PostService("https://localhost:7264/api/customer",reqData,true, headers);
+    }
+  
+getOrder(){
+  let headers = {
+    headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+  };
+   
+  return this.http.getService("https://localhost:7264/api/orders",true, headers);
 
 }
 

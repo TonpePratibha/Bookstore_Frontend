@@ -1,1 +1,29 @@
-<p>wishlist works!</p>
+
+<div class="order-page">
+    <div class="order-header">
+      <h2>My Wishlist</h2>
+      <p>All your wishlist items are listed here.</p>
+    </div>
+
+    <div class="order-list">
+      <div class="order-card" *ngFor="let item of wishlistArray">
+        <div class="book-image">
+          <img [src]="item.bookImage" alt="Book cover" />
+        </div>
+        <div class="book-details">
+          <h3>{{ item.bookName }}</h3>
+          <p class="author">by {{ item.author }}</p>
+          <p class="quantity">{{ item.quantity }}</p>
+          <p class="price">
+            Rs. {{ item.totalPrice }}
+            <span class="original-price">Rs. {{ item.originalPrice }}</span>
+          </p>
+        </div>
+        <div class="order-date">
+          <!-- <p class="placed-on">remove</p> -->
+          <mat-icon class="delete-icon" aria-hidden="true" (click)="removeFromWishlist(item.bookId)">delete</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  

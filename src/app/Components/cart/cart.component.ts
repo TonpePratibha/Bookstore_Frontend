@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../Services/Cart/cart.service';
 import { SharedService } from '../../Services/Shared/shared.service';
+import { OrderService } from '../../Services/Order/order.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-cart',
@@ -13,8 +17,10 @@ export class CartComponent implements OnInit{
   cartItems: any[] = [];
   totalQuantity:any;
   totalCost:any;
+  CustomerForm!: FormGroup;
+  addressPanelOpen = false;
 
-  constructor(private cartService:CartService,private sharedservice:SharedService){}
+  constructor(private cartService:CartService,private sharedservice:SharedService,private orderservice:OrderService,private formbuilder:FormBuilder,private snackbar:MatSnackBar){}
 
 ngOnInit(): void {
   this.fetchCartItems();
@@ -22,6 +28,16 @@ ngOnInit(): void {
   //   {
   //     this.fetchCartItems();
   //   })
+  
+  this.CustomerForm = this.formbuilder.group({
+    fullname: ['', [Validators.required, Validators.minLength(3),Validators.pattern(/^[A-Za-z\s]+$/)]],
+    mobile: ['',[Validators.required, Validators.pattern('^[0-9]{10}$')]],
+    address: ['',Validators.required],
+    city: ['', [Validators.required, Validators.minLength(6)]],
+    state:['', [Validators.required,Validators.pattern(/^[A-Za-z\s]+$/)]],
+   type:['', [Validators.required, Validators.minLength(3),Validators.pattern(/^[A-Za-z\s]+$/)]],
+    
+  });
 }
   fetchCartItems() {
     this.cartService.getCart().subscribe(
@@ -70,6 +86,58 @@ ngOnInit(): void {
         }
       );
     }
+  }
+
+  addCustomerDetails(){
+    this.CustomerForm.markAllAsTouched();
+  
+    if (this.CustomerForm.invalid) {
+      this.snackbar.open('Please fill the form correctly', 'Close', {
+        duration: 2000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+  
+    const reqData = this.CustomerForm.value;
+  
+    this.orderservice.addCustomerDetails(reqData).subscribe({
+      next: (res) => {
+        console.log("Successful:", res);
+        // this.router.navigate(['/login']);
+        this.closeexapansion();
+        
+        this.snackbar.open('Customer details added Successfully!', 'Close', {
+          duration: 1500,
+          panelClass: ['success-snackbar']
+        });
+      },
+      
+      error: (err) => {
+        console.error(" Failed to add customerdetails", err);
+      }
+    });
+  }
+
+    
+  
+
+  placeOrder(){
+    this.orderservice.placeOrder().subscribe({
+      next: (response) => {
+        console.log('Order placed successfully:', response);
+        this.closeexapansion();
+      },
+      error: (error) => {
+        console.error('Error placing order:', error);
+      }
+    });
+
+    
+  }
+
+  closeexapansion(){
+    this.addressPanelOpen=false;
   }
   
 }

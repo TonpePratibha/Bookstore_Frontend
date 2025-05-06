@@ -72,7 +72,7 @@ export class BooksdataComponent implements OnInit {
           ...book,
           bookImage: `images/book${(index % 9) + 1}.png`
         }));
-        
+        console.log(response);
         this.totalBooks = this.booksArray.length;
         this.sortBooks()
         this.setPagedBooks();

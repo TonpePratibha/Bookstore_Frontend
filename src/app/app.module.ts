@@ -26,7 +26,7 @@ import { CartComponent } from './Components/cart/cart.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { OrderComponent } from './Components/order/order.component';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import { WishlistComponent } from './Components/wishlist/wishlist.component';
     MatOptionModule,
     MatPaginatorModule,
     FormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule
 
   ],
   providers: [

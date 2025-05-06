@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../Services/Book/book.service';
 import { SharedService } from '../../Services/Shared/shared.service';
 import { CartService } from '../../Services/Cart/cart.service';
+import { WishlistService } from '../../Services/Wishlist/wishlist.service';
 
 @Component({
   selector: 'app-bookdetails',
@@ -19,7 +20,8 @@ export class BookdetailsComponent implements OnInit{
   quantity: number = 1;
 
 
-constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,private cartservice:CartService){}
+constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
+  private cartservice:CartService,private wishlistservice:WishlistService){}
 
   
   ngOnInit(): void {
@@ -65,6 +67,22 @@ addToBag() {
 }
 
 
+addTowishlist() {
+  
+  this.wishlistservice.addToWishlist(this.book.id).subscribe({
+    next: (res) => {
+      this.snackBar.open("Book added to wishlist!", '', { duration: 2000 });
+       this.router.navigate(['/dashboard/wishlist']);
+       console.log("added to wishlist")
+    },
+    error: (err) => {
+      console.error("Error adding to wishlist:", err);
+      this.snackBar.open("Failed to add to wishlist", '', { duration: 2000 });
+    }
+  });
+}
+
+
 increaseQuantity() {
   this.quantity++;
  
@@ -75,5 +93,35 @@ decreaseQuantity() {
     this.quantity--;
   }
   }
+
+  selectedImage: string = '';
+
+  setMainImage(imageUrl: string): void {
+    this.selectedImage = imageUrl;
+  }
+  
+//feedback part static
+  //rating = 0;
+reviewText = '';
+feedbackList = [
+  { name: 'Aniket Chile', rating: 4, comment: 'Good product. Even though the translation could have been better...' },
+  { name: 'Shweta Bodkar', rating: 4, comment: 'Chanakya’s neat and succinct writings are thought-provoking.' }
+];
+
+setRating(star: number): void {
+  this.rating = star;
+}
+
+submitReview(): void {
+  if (this.reviewText && this.rating) {
+    this.feedbackList.unshift({
+      name: 'pratibha', // Replace dynamically from user if logged in
+      rating: this.rating,
+      comment: this.reviewText
+    });
+    this.reviewText = '';
+    this.rating = 0;
+  }
+}
 
 }
