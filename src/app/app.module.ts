@@ -28,6 +28,8 @@ import { OrderComponent } from './Components/order/order.component';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     BooksdataComponent,
   CartComponent,
   OrderComponent,
-  WishlistComponent
+  WishlistComponent,
+ 
+  ResetPasswordComponent
  
     
   ],

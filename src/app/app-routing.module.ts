@@ -10,12 +10,13 @@ import { CartComponent } from './Components/cart/cart.component';
 import { OrderComponent } from './Components/order/order.component';
 import { withJsonpSupport } from '@angular/common/http';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
+import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'registerlogin', pathMatch: 'full' },
   {path:'registerlogin', component:RegisterloginComponent},
   {path:'forgot', component:ForgotPasswordComponent},
-
+ {path:'reset',component:ResetPasswordComponent},
  
   {path:'dashboard',component:DashboardComponent, canActivate:[authGuard],
     children:[

@@ -31,4 +31,29 @@ export class UserService {
     };
     return this.http.PostService('https://localhost:7264/api/user', reqData, false, headers);
   }
+
+
+  ForgotPassword(reqData:any){
+
+    let headers = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json' 
+      })
+    };
+    return this.http.PostService('https://localhost:7264/api/user/forgot-password', reqData, false, headers);
+
+  }
+
+
+  ResetPassword(reqData:any,token:string){
+
+    let headers = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json' ,
+        'Authorization':`Bearer${token}`
+      })
+    };
+    return this.http.PostService('https://localhost:7264/api/user/reset-password', reqData, false, headers);
+
+  }
 }
