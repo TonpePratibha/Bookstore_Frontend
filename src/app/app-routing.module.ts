@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'registerlogin', pathMatch: 'full' },
   {path:'registerlogin', component:RegisterloginComponent},
   {path:'forgot', component:ForgotPasswordComponent},
- {path:'reset',component:ResetPasswordComponent},
+//  {path:'reset',component:ResetPasswordComponent},
+ {path:'reset/:token',component:ResetPasswordComponent},
  
   {path:'dashboard',component:DashboardComponent, canActivate:[authGuard],
     children:[
