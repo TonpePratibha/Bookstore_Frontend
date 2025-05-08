@@ -11,6 +11,7 @@ import { OrderComponent } from './Components/order/order.component';
 import { withJsonpSupport } from '@angular/common/http';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
+import { OrderSuccessComponent } from './Components/order-success/order-success.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'registerlogin', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'forgot', component:ForgotPasswordComponent},
 //  {path:'reset',component:ResetPasswordComponent},
  {path:'reset/:token',component:ResetPasswordComponent},
+
  
   {path:'dashboard',component:DashboardComponent, canActivate:[authGuard],
     children:[
@@ -26,7 +28,8 @@ const routes: Routes = [
      {path:'bookdetails/:id',component:BookdetailsComponent},
      {path:'cart', component:CartComponent},
      {path:'order',component:OrderComponent},
-     {path:'wishlist',component:WishlistComponent}
+     {path:'wishlist',component:WishlistComponent},
+     {path:'success',component:OrderSuccessComponent}
     ]
     
   }

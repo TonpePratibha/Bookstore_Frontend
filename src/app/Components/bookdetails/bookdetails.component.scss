@@ -306,4 +306,20 @@
       }
     }
   }
+  .breadcrumb a {
+    text-decoration: none;
+    color: #5f6368;
+    padding-left:20%;
+    padding-top :60%;
+    margin-top:25%;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb span.active {
+    font-weight: bold;
+    color: #202124; /* darker shade for bold text */
+  }
   

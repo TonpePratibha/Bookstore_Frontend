@@ -19,6 +19,7 @@ export class SharedService {
 // cartRefresh$=this.cartRefreshTrigger.asObservable();
 
   constructor(private cartService:CartService){}
+  
   setSearchQuery(query: string) {
     this.searchQuerySubject.next(query);
   }

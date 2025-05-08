@@ -16,7 +16,7 @@ export class BooksdataComponent implements OnInit {
   booksArray: any[] = [];
   pagedBooks: any[] = [];
   searchQuery:any='';
-   // Property to store search query
+ 
 
   // Pagination properties
   pageSize = 8;
@@ -42,6 +42,8 @@ export class BooksdataComponent implements OnInit {
     this.totalBooks = filteredBooks.length;
     this.setPagedBooks(filteredBooks);
   }
+
+  
   
   sortBooks() {
     switch (this.sortOption) {

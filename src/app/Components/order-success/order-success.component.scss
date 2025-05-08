@@ -1,0 +1,50 @@
+.success-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .success-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  p {
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .contact-box {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    font-size: 14px;
+    text-align: left;
+    color: #444;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  button {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #1565c0;
+  }
+  

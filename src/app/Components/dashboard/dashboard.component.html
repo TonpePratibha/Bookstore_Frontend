@@ -16,21 +16,43 @@
 
         <div class="profile-wrapper" (mouseenter)="showLogoutText = true" (mouseleave)="showLogoutText = false">
           <button mat-button class="icon-button" (click)="OnLogout()">
-            <mat-icon>person</mat-icon> Profile
+            <mat-icon class="person">person</mat-icon>
           </button>
           <div class="logout-text" *ngIf="showLogoutText">
             Logout
           </div>
         </div>
       
-        <button
+        
+      
+        <!-- <button
   mat-button
   class="icon-button white-badge"
   [matBadge]="cartCount"
   [matBadgeHidden]="cartCount === 0"
   matBadgeOverlap="false" 
   routerLink="/dashboard/cart">
-  <mat-icon>shopping_cart</mat-icon>Cart
+  <mat-icon>shopping_cart</mat-icon>
+</button> -->
+
+<!-- <div class="demo-section">
+  Icon with a badge
+  <mat-icon matBadge="15">home</mat-icon>
+    <span class="cdk-visually-hidden">
+      Example with a home icon with overlaid badge showing the number 15
+    </span>
+</div> -->
+
+<button
+  mat-icon-button
+  class="icon-button white-badge"
+  disableRipple
+  [matBadge]="cartCount"
+  [matBadgeHidden]="cartCount === 0"
+  matBadgeColor="warn"
+  matBadgeOverlap="false"
+  routerLink="/dashboard/cart">
+  <mat-icon>shopping_cart</mat-icon>
 </button>
 
       </div>

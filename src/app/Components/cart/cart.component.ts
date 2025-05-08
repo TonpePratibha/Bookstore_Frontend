@@ -5,6 +5,7 @@ import { OrderService } from '../../Services/Order/order.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { timeStamp } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -19,8 +20,10 @@ export class CartComponent implements OnInit{
   totalCost:any;
   CustomerForm!: FormGroup;
   addressPanelOpen = false;
+  summeryPanelOpen =false;
 
-  constructor(private cartService:CartService,private sharedservice:SharedService,private orderservice:OrderService,private formbuilder:FormBuilder,private snackbar:MatSnackBar){}
+  constructor(private cartService:CartService,private sharedservice:SharedService,private orderservice:OrderService,
+    private formbuilder:FormBuilder,private snackbar:MatSnackBar,private router :Router,private snackBar:MatSnackBar){}
 
 ngOnInit(): void {
   this.fetchCartItems();
@@ -105,12 +108,13 @@ ngOnInit(): void {
       next: (res) => {
         console.log("Successful:", res);
         // this.router.navigate(['/login']);
-        this.closeexapansion();
+        
         
         this.snackbar.open('Customer details added Successfully!', 'Close', {
           duration: 1500,
           panelClass: ['success-snackbar']
         });
+        this.openSummeryPanel();
       },
       
       error: (err) => {
@@ -126,7 +130,10 @@ ngOnInit(): void {
     this.orderservice.placeOrder().subscribe({
       next: (response) => {
         console.log('Order placed successfully:', response);
-        this.closeexapansion();
+        this.snackBar.open("Order placed successfully:!", '', { duration: 2000 });
+        this.router.navigate(['/dashboard/success']);
+
+        this.closeSummeryPanel();
       },
       error: (error) => {
         console.error('Error placing order:', error);
@@ -136,8 +143,18 @@ ngOnInit(): void {
     
   }
 
-  closeexapansion(){
+  openSummeryPanel(){
+    this.addressPanelOpen=true;
+    this.summeryPanelOpen=true;
+  }
+  closeExpansion(){
     this.addressPanelOpen=false;
   }
-  
+
+  openAddressPanel(){
+    this.addressPanelOpen=true;
+  }
+  closeSummeryPanel(){
+this.summeryPanelOpen=false;
+  }
 }

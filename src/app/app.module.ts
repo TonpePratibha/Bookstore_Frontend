@@ -29,6 +29,7 @@ import { WishlistComponent } from './Components/wishlist/wishlist.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
+import { OrderSuccessComponent } from './Components/order-success/order-success.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ResetPasswordComponent } from './Components/reset-password/reset-passwo
   OrderComponent,
   WishlistComponent,
  
-  ResetPasswordComponent
+  ResetPasswordComponent,
+     OrderSuccessComponent
  
     
   ],
