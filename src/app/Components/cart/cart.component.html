@@ -89,8 +89,8 @@
           <mat-label>Type (Home/Work)</mat-label>
           <input matInput formControlName="type">
         </mat-form-field>
-  
-        <button mat-raised-button color="primary" *ngIf="!summeryPanelOpen" (click)="addCustomerDetails()">
+       
+        <button class="continue"  *ngIf="!summeryPanelOpen" (click)="addCustomerDetails()">
           Continue
         </button>
       </form>
@@ -115,12 +115,18 @@
             <span class="summary-current-price">Rs. {{ item.price }}</span>
             <span class="summary-original-price">Rs. {{ item.originalPrice || item.price + 500 }}</span>
           </div>
+          
         </div>
+      
       </div>
-    
+      
+      <div class="summary-totals">
+        <div><strong>Total Items:</strong> {{ totalQuantity }}</div>
+        <div><strong>Total Cost:</strong> Rs. {{ totalCost }}</div>
+      </div>
    
       <div class="summary-footer">
-        <button mat-flat-button color="primary"  class="checkout" (click)=" placeOrder()">Checkout</button>
+        <button  class="checkout" (click)=" placeOrder()">Checkout</button>
       </div>
     </mat-expansion-panel>
     

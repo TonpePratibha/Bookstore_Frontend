@@ -49,6 +49,27 @@ export class DashboardComponent implements OnInit {
     this.snackBar.open("Logout Successful", '', { duration: 3000 });
   }
  
+
+  isLoggedIn = false; // Set this based on your login state
+
+login() {
+  this.router.navigate(['/login']);
+}
+
+logout() {
+  // Clear tokens/session
+  this.isLoggedIn = false;
+  this.router.navigate(['/registerlogin']);
+}
+
+goToOrders() {
+  this.router.navigate(['/dashboard/order']);
+}
+
+goToWishlist() {
+  this.router.navigate(['/dashboard/wishlist']);
+}
+
   
   
 }

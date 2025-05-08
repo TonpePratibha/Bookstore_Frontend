@@ -727,15 +727,39 @@ body {
     gap: 5px;
   }
 
-  
 
+.profile-menu{
+  padding-left:25px;
+}
+  .profile-menu .menu-header {
+    padding: 16px;
+    width: 260px;
+    
+  }
+  
+  .menu-header h3 {
+    margin: 0;
+    font-weight: 600;
+    background-color: white !important;
+  }
+  
+  .menu-header p {
+    margin: 4px 0 12px;
+    font-size: 13px;
+    color: #fbeded;
+    padding:25px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
 
   
 
 
 
   .logout-text {
-    background-color: rgb(110, 108, 108);
+    background-color: white;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;

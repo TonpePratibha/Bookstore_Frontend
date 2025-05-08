@@ -14,7 +14,7 @@
       <div class="header-buttons">
        
 
-        <div class="profile-wrapper" (mouseenter)="showLogoutText = true" (mouseleave)="showLogoutText = false">
+        <!-- <div class="profile-wrapper" (mouseenter)="showLogoutText = true" (mouseleave)="showLogoutText = false">
           <button mat-button class="icon-button" (click)="OnLogout()">
             <mat-icon class="person">person</mat-icon>
           </button>
@@ -22,7 +22,37 @@
             Logout
           </div>
         </div>
-      
+       -->
+        <div class="profile-wrapper">
+          <button mat-button [matMenuTriggerFor]="profileMenu" class="icon-button">
+            <mat-icon class="person">person</mat-icon>
+          </button>
+        </div>
+        
+        <mat-menu #profileMenu="matMenu" yPosition="below" xPosition="after" class="profile-menu">
+          <div class="menu-header">
+            <h3>Welcome</h3>
+            <p>To access account and manage orders</p>
+            <button *ngIf="!isLoggedIn" mat-stroked-button color="warn" class="full-width" (click)="login()">LOGIN/SIGNUP</button>
+          </div>
+        
+          <mat-divider></mat-divider>
+        
+          <button mat-menu-item (click)="goToOrders()">
+            <mat-icon>shopping_bag</mat-icon>
+            <span>My Orders</span>
+          </button>
+        
+          <button mat-menu-item (click)="goToWishlist()">
+            <mat-icon>favorite_border</mat-icon>
+            <span>Wishlist</span>
+          </button>
+        
+          <button  mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
         
       
         <!-- <button

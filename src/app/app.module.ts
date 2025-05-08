@@ -27,9 +27,10 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { OrderComponent } from './Components/order/order.component';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatDividerModule } from '@angular/material/divider';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 import { OrderSuccessComponent } from './Components/order-success/order-success.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,9 @@ import { OrderSuccessComponent } from './Components/order-success/order-success.
     MatPaginatorModule,
     FormsModule,
     MatBadgeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDividerModule,
+    MatMenuModule
 
   ],
   providers: [

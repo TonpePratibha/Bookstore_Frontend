@@ -1,8 +1,9 @@
 .order-page {
-    padding-left: 7rem;
-    padding-right: 7rem;
+    padding-left: 15rem;
+    padding-right: 15rem;
     padding-bottom: 4rem;
     padding-top: 3rem;
+    
     .order-header {
       text-align: left;
       margin-bottom: 1rem;
@@ -76,5 +77,20 @@
 
       }
     }
+  }
+  .breadcrumb a {
+    text-decoration: none;
+    color: #5f6368;
+  
+  
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb span.active {
+    font-weight: bold;
+    color: #202124; /* darker shade for bold text */
   }
   

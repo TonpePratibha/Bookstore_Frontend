@@ -347,13 +347,26 @@
   .place-order {
     background-color: #1976d2;
     color: white;
-    padding: 0.5rem 2rem;
+    padding: 0.7rem 2rem;
     border: none;
     cursor: pointer;
     font-weight: 500;
     margin-bottom: 1rem;
     margin-left: 76%;
   }
+
+.checkout{
+  background-color: #1976d2;
+  color: white;
+  padding: 0.7rem 3rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  margin-left: 77%;
+  
+
+}
 
   ::ng-deep mat-expansion-panel {
     background: #fff;
@@ -386,15 +399,30 @@
         font-size: 14px;
       }
     }
-
+    // .continue{
+    //   background-color: #1976d2;
+    //   color: white;
+    //   padding: 0.5rem 7rem;
+    //   border: none;
+    //   cursor: pointer;
+    //   font-weight: 500;
+    //   margin-bottom: 1rem;
+    //   margin-left: 90%;
+    //   justify-self:end;
+      
+    
+    // }
     button {
       grid-column: 1 / -1;
       justify-self: end;
       margin-top: 1rem;
       background-color: #2874f0;
       color: white;
-      padding: 0.5rem 1.5rem;
+      padding: 0.7rem 3rem;
       font-weight: 500;
+      cursor:pointer;
+      margin-right:2.6%;
+      border:none;
     }
   }
 
@@ -480,11 +508,17 @@
   color: #a0a0a0;
   //text-decoration: line-through;
 }
-.summary-footer{
-  padding-left:45%;
-  margin-left:45%;
+.summary-totals {
+  text-align: left;
+  padding: 1rem 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+ 
 }
-}
-.checkout{
-  border-radius: none !important;
+
+// .summary-footer{
+//   padding-left:35%;
+//   margin-left:45%;
+// }
 }

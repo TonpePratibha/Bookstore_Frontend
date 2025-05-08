@@ -42,6 +42,12 @@ ngOnInit(): void {
     
   });
 }
+
+
+
+
+
+
   fetchCartItems() {
     this.cartService.getCart().subscribe(
       (response: any) => {

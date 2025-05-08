@@ -21,7 +21,7 @@ export class BookdetailsComponent implements OnInit{
 
 
 constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
-  private cartservice:CartService,private wishlistservice:WishlistService){}
+  private cartservice:CartService,private wishlistservice:WishlistService,private cartService:CartService){}
 
   
   ngOnInit(): void {
@@ -82,17 +82,39 @@ addTowishlist() {
   });
 }
 
+increaseQuantity(item: any) {
+  const newQuantity = item.quantity + 1;
+  this.cartService.updateCart(item.bookId, newQuantity).subscribe(
+    (response) => {
+      console.log('Quantity increased:', response);
+      // this.sharedservice.triggerCartRefresh();
+      // this.sharedservice.updateCartCountFromBackend();
+     
+    },
+    (error) => {
+      console.error('Error increasing quantity:', error);
+    }
+  );
+}
+decreaseQuantity(item: any) {
+  const newQuantity = item.quantity - 1;
 
-increaseQuantity() {
-  this.quantity++;
- 
+  // If quantity is 1, and user clicks '-', we set quantity to 0 — backend deletes the item.
+  if (newQuantity >= 0) {
+    this.cartService.updateCart(item.bookId, newQuantity).subscribe(
+      (response) => {
+        console.log('Quantity decreased or item removed:', response);
+        // this.sharedservice.triggerCartRefresh();
+        // this.sharedservice.updateCartCountFromBackend();
+       
+      },
+      (error) => {
+        console.error('Error decreasing quantity or removing item:', error);
+      }
+    );
+  }
 }
 
-decreaseQuantity() {
-  if (this.quantity > 1) {
-    this.quantity--;
-  }
-  }
 
   selectedImage: string = '';
 

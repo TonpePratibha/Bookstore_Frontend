@@ -34,13 +34,15 @@
        
         <ng-template #quantityBlock>
           <div class="quantity-section">
-            <button (click)="decreaseQuantity()">−</button>
+            <button  class="btn">−</button>
             <span>{{ quantity }}</span>
-            <button (click)="increaseQuantity()">+</button>
+            <button  class="btn">+</button>
           </div>
         </ng-template>
       
-        <button class="wishlist" (click)="addTowishlist()">WISHLIST</button>
+        <button class="wishlist" (click)="addTowishlist()">
+          <mat-icon>favorite_border</mat-icon>
+          <span>WISHLIST</span> </button>
       </div>
       
     </div>
