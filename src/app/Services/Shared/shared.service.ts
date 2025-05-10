@@ -10,13 +10,17 @@ export class SharedService {
   private searchQuerySubject = new BehaviorSubject<string>('');
   searchQuery$ = this.searchQuerySubject.asObservable();
 
+private searcquertysubject=new BehaviorSubject<string>('');
+searchquery$=this.searchQuerySubject.asObservable();
+
+
   private cartItems: any[] = [];
  
   private cartCount = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCount.asObservable();
 
-// private cartRefreshTrigger=new BehaviorSubject<void>(undefined)
-// cartRefresh$=this.cartRefreshTrigger.asObservable();
+private cartRefreshTrigger=new BehaviorSubject<void>(undefined)
+cartRefresh$=this.cartRefreshTrigger.asObservable();
 
   constructor(private cartService:CartService){}
   
@@ -28,9 +32,9 @@ export class SharedService {
   //cartdetails
 
 
-// triggerCartRefresh(){
-//   this.cartRefreshTrigger.next();
-// }
+triggerCartRefresh(){
+  this.cartRefreshTrigger.next();
+}
 
 
 

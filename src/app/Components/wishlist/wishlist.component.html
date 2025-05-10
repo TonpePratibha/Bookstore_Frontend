@@ -10,7 +10,7 @@
     </div>
 
     <div class="order-list">
-      <div class="order-card" *ngFor="let item of wishlistArray">
+      <div class="order-card" *ngFor="let item of wishlistArray;trackBy: trackByBookId">
         <div class="book-image">
           <img [src]="item.bookImage" alt="Book cover" />
         </div>

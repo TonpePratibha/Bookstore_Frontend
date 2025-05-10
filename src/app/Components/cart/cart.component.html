@@ -13,7 +13,7 @@
   <div class="cart-box">
     <h2>My cart ({{ totalQuantity }})</h2>
 
-    <div class="cart-item" *ngFor="let item of cartItems">
+    <div class="cart-item" *ngFor="let item of cartItems;trackBy: trackByBookId">
       <img [src]="item.bookImage || 'images/book4.png'" alt="Book" class="book-img" />
       <div class="item-details">
         <h3>{{ item.bookName }}</h3>
@@ -110,6 +110,7 @@
         <div class="summary-details">
           <h4 class="summary-title">{{ item.bookName }}</h4>
           <p class="summary-author">by {{ item.author }}</p>
+           <span > {{ item.quantity}}</span>
           
           <div class="summary-price">
             <span class="summary-current-price">Rs. {{ item.price }}</span>

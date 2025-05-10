@@ -4,7 +4,8 @@ import { SharedService } from '../../Services/Shared/shared.service';
 import { OrderService } from '../../Services/Order/order.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { timeStamp } from 'console';
+import { ChangeDetectorRef } from '@angular/core';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,14 +24,14 @@ export class CartComponent implements OnInit{
   summeryPanelOpen =false;
 
   constructor(private cartService:CartService,private sharedservice:SharedService,private orderservice:OrderService,
-    private formbuilder:FormBuilder,private snackbar:MatSnackBar,private router :Router,private snackBar:MatSnackBar){}
+    private formbuilder:FormBuilder,private snackbar:MatSnackBar,private router :Router,private snackBar:MatSnackBar,private changedetector:ChangeDetectorRef){}
 
 ngOnInit(): void {
   this.fetchCartItems();
-  // this.sharedservice.cartRefresh$.subscribe(()=>
-  //   {
-  //     this.fetchCartItems();
-  //   })
+  this.sharedservice.cartRefresh$.subscribe(()=>
+    {
+      this.fetchCartItems();
+    })
   
   this.CustomerForm = this.formbuilder.group({
     fullname: ['', [Validators.required, Validators.minLength(3),Validators.pattern(/^[A-Za-z\s]+$/)]],
@@ -48,14 +49,19 @@ ngOnInit(): void {
 
 
 
+
+
   fetchCartItems() {
     this.cartService.getCart().subscribe(
       (response: any) => {
         console.log('Cart summary:', response);
   
-        this.cartItems = response.items;           // Items in the cart
+       this.cartItems = response.items;   
+           //this.cartItems = [...response.items];         // Items in the cart
+          
         this.totalQuantity = response.totalQuantity;
         this.totalCost = response.totalCost;
+        this.changedetector.detectChanges();
        
       },
       (error) => {
@@ -69,9 +75,9 @@ ngOnInit(): void {
     this.cartService.updateCart(item.bookId, newQuantity).subscribe(
       (response) => {
         console.log('Quantity increased:', response);
-        // this.sharedservice.triggerCartRefresh();
-        // this.sharedservice.updateCartCountFromBackend();
-        this.fetchCartItems();
+        this.sharedservice.triggerCartRefresh();
+        this.sharedservice.updateCartCountFromBackend();
+        // this.fetchCartItems();
       },
       (error) => {
         console.error('Error increasing quantity:', error);
@@ -80,7 +86,7 @@ ngOnInit(): void {
   }
   decreaseQuantity(item: any) {
     const newQuantity = item.quantity - 1;
-  
+   newQuantity<=0?0:newQuantity;
     // If quantity is 1, and user clicks '-', we set quantity to 0 — backend deletes the item.
     if (newQuantity >= 0) {
       this.cartService.updateCart(item.bookId, newQuantity).subscribe(
@@ -89,6 +95,10 @@ ngOnInit(): void {
           // this.sharedservice.triggerCartRefresh();
           // this.sharedservice.updateCartCountFromBackend();
           this.fetchCartItems();
+          //  this.router.navigate(['/dashboard/cart']);
+       
+
+        
         },
         (error) => {
           console.error('Error decreasing quantity or removing item:', error);
@@ -96,7 +106,13 @@ ngOnInit(): void {
       );
     }
   }
+  
+trackByBookId(index: number, item: any): number {
+  return item.bookId;
+}
 
+
+  
   addCustomerDetails(){
     this.CustomerForm.markAllAsTouched();
   

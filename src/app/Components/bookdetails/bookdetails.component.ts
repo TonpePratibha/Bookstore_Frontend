@@ -21,7 +21,7 @@ export class BookdetailsComponent implements OnInit{
 
 
 constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
-  private cartservice:CartService,private wishlistservice:WishlistService,private cartService:CartService){}
+  private cartservice:CartService,private wishlistservice:WishlistService){}
 
   
   ngOnInit(): void {
@@ -43,9 +43,6 @@ constructor(private router:Router,private snackBar:MatSnackBar,private bookservi
     }
   });
 }
-
-
-
 
 
 addToBag() {
@@ -82,36 +79,35 @@ addTowishlist() {
   });
 }
 
+
+
+
+
 increaseQuantity(item: any) {
-  const newQuantity = item.quantity + 1;
-  this.cartService.updateCart(item.bookId, newQuantity).subscribe(
+  this.quantity++;
+  this.cartservice.updateCart(item.id, this.quantity).subscribe(
     (response) => {
       console.log('Quantity increased:', response);
-      // this.sharedservice.triggerCartRefresh();
-      // this.sharedservice.updateCartCountFromBackend();
-     
     },
     (error) => {
       console.error('Error increasing quantity:', error);
     }
   );
 }
-decreaseQuantity(item: any) {
-  const newQuantity = item.quantity - 1;
 
-  // If quantity is 1, and user clicks '-', we set quantity to 0 — backend deletes the item.
-  if (newQuantity >= 0) {
-    this.cartService.updateCart(item.bookId, newQuantity).subscribe(
+decreaseQuantity(item: any) {
+  if (this.quantity > 1) {
+    this.quantity--; 
+    this.cartservice.updateCart(item.id, this.quantity).subscribe(
       (response) => {
-        console.log('Quantity decreased or item removed:', response);
-        // this.sharedservice.triggerCartRefresh();
-        // this.sharedservice.updateCartCountFromBackend();
-       
+        console.log('Quantity decreased:', response);
       },
       (error) => {
-        console.error('Error decreasing quantity or removing item:', error);
+        console.error('Error decreasing quantity:', error);
       }
     );
+  } else {
+    this.snackBar.open("Minimum quantity is 1", '', { duration: 2000 });
   }
 }
 
@@ -137,7 +133,7 @@ setRating(star: number): void {
 submitReview(): void {
   if (this.reviewText && this.rating) {
     this.feedbackList.unshift({
-      name: 'pratibha', // Replace dynamically from user if logged in
+      name: 'pratibha', 
       rating: this.rating,
       comment: this.reviewText
     });

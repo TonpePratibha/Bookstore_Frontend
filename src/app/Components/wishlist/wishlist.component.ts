@@ -10,29 +10,15 @@ import { SharedService } from '../../Services/Shared/shared.service';
 })
 export class WishlistComponent implements OnInit{
 wishlistArray:any[]=[];
-// filteredBooks:any[]=[];
-//searchQuery:string='';
-// totalBooks:any;
-  constructor(private wishlistservice:WishlistService,private sharedservice:SharedService){}
+
+constructor(private wishlistservice:WishlistService,private sharedservice:SharedService){}
 
  ngOnInit(): void {
    this.getWishlistItems();
-  //  this.sharedservice.searchQuery$.subscribe(query => {
-  //   this.searchQuery = query;
-  //   this.filterBooks();
-  // });
+
 
  }
- 
-//  filterBooks() {
-//   const filteredBooks = this.wishlistArray.filter(book =>
-//     book.bookName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-//     book.author.toLowerCase().includes(this.searchQuery.toLowerCase())
-//   );
-//   this.totalBooks = this.filteredBooks.length;
-//   // this.setPagedBooks(filteredBooks);
 
-// }
   getWishlistItems() {
     this.wishlistservice.getWishList().subscribe({
       next: (response: any) => {
@@ -50,13 +36,18 @@ wishlistArray:any[]=[];
       }
     });
   }
-
+  
+trackByBookId(index: number, item: any): number {
+  return item.bookId;
+}
   removeFromWishlist(bookId: number) {
     this.wishlistservice.removeFromWishlist(bookId).subscribe({
       next: (response: any) => {
-        
+          this.sharedservice.triggerCartRefresh();
         this.wishlistArray = this.wishlistArray.filter(book => book.id !== bookId);    
         console.log("Updated wishlist:", this.wishlistArray);
+        //window.location.reload();
+      this.getWishlistItems();
       },
       error: (error) => {
         console.error("Error removing book from wishlist:", error);

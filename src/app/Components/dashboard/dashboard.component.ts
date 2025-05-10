@@ -35,6 +35,11 @@ export class DashboardComponent implements OnInit {
   searchBooks() {
     this.sharedservice.setSearchQuery(this.searchQuery);
   }
+showProfilePanel = false;
+
+toggleProfilePanel() {
+  this.showProfilePanel = !this.showProfilePanel;
+}
 
 
   
