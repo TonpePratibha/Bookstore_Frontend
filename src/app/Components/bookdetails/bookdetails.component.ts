@@ -18,7 +18,7 @@ export class BookdetailsComponent implements OnInit{
   book:any;
   isAddedToBag: boolean = false;
   quantity: number = 1;
-
+firstname:string='';
 
 constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
   private cartservice:CartService,private wishlistservice:WishlistService){}
@@ -26,6 +26,9 @@ constructor(private router:Router,private snackBar:MatSnackBar,private bookservi
   
   ngOnInit(): void {
     this.getBookDetails();
+    this.firstname=this.sharedservice.getFirstName();
+     localStorage.getItem('firstname');
+    console.log("name",this.firstname);
   }
 
   getBookDetails(){
@@ -130,10 +133,11 @@ setRating(star: number): void {
   this.rating = star;
 }
 
+
 submitReview(): void {
   if (this.reviewText && this.rating) {
     this.feedbackList.unshift({
-      name: 'pratibha', 
+      name: this.firstname, 
       rating: this.rating,
       comment: this.reviewText
     });

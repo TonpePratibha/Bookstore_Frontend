@@ -1,9 +1,9 @@
 
 <!-- <div class="breadcrumb">Home / <span>Book</span></div> -->
-<div class="breadcrumb">
+<!-- <div class="breadcrumb">
   <a routerLink="/dashboard/home">Home</a> / 
   <span class="active">Book</span>
-</div>
+</div> -->
 <div class="book-details-wrapper">
   
   <div class="image-gallery">
@@ -19,6 +19,10 @@
       <!-- <div class="main-image">
         <img [src]="book.bookImage" alt="Book Image" />
       </div> -->
+      <div class="breadcrumb">
+  <a routerLink="/dashboard/home">Home</a> / 
+  <span class="active">Book</span>
+</div>
       <div class="main-image">
         <img [src]="selectedImage || book.bookImage" alt="Book Image" />
       </div>
@@ -41,7 +45,7 @@
         </ng-template>
       
         <button class="wishlist" (click)="addTowishlist()">
-          <mat-icon>favorite_border </mat-icon>
+          <mat-icon> favorite_border </mat-icon>
           <span> WISHLIST</span> </button>
       </div>
       

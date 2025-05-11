@@ -1,8 +1,8 @@
-
+<!-- 
   
 
 <div class="cart-container">
-  <!-- <div class="breadcrumb">Home / <span>My cart</span></div> -->
+
   <div class="breadcrumb">
     <a routerLink="/dashboard/home">Home</a> / 
     <span class="active">My cart</span>
@@ -26,17 +26,12 @@
           <button (click)="decreaseQuantity(item)" class="cartbuttons">-</button>
           <span id="qty"> {{ item.quantity}}</span>
           <button (click)="increaseQuantity(item)" class="cartbuttons">+</button>
+
+          <span>Remove</span>
         </div>
       </div>
     </div>
 
-   
-    <!-- <div class="location">
-      <label>
-        <input type="checkbox" checked />
-        Use current location
-      </label>
-    </div> -->
 
     <button class="place-order"  *ngIf="!addressPanelOpen" (click)="openAddressPanel()">PLACE ORDER</button>
   </div>
@@ -51,13 +46,7 @@
         </mat-panel-title>
        
       </mat-expansion-panel-header>
-      <div class="add-new-address" >
-       
-        <span> Add New Address </span>
-      </div>
-      <div class="edit-icon" >
-        <mat-icon>edit</mat-icon>
-      </div>
+      
       
       <form [formGroup]="CustomerForm" class="address-form">
         <mat-form-field appearance="outline">
@@ -136,4 +125,104 @@
   </mat-accordion>
   
 </div>
- 
+  -->
+<div class="cart-container">
+  <div class="breadcrumb">
+    <a routerLink="/dashboard/home">Home</a> / 
+    <span class="active">My cart</span>
+  </div>
+
+  <div class="cart-box">
+    <h2>My cart ({{ totalQuantity }})</h2>
+
+    <div class="cart-item" *ngFor="let item of cartItems; trackBy: trackByBookId">
+      <img [src]="item.bookImage || 'images/book4.png'" alt="Book" class="book-img" />
+      <div class="item-details">
+        <h3>{{ item.bookName }}</h3>
+        <p>by {{ item.author }}</p>
+        <div class="price">
+          <span class="current-price">Rs. {{ item.price }}</span>
+          <span class="original-price">Rs. {{ item.originalPrice || item.price + 500 }}</span>
+        </div>
+        <div class="quantity-control">
+          <button (click)="decreaseQuantity(item)" class="cartbuttons">-</button>
+          <span id="qty">{{ item.quantity }}</span>
+          <button (click)="increaseQuantity(item)" class="cartbuttons">+</button>
+          <span class="remove-text" (click)="removeItem(item.bookId)">Remove</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="place-order" *ngIf="!addressPanelOpen" (click)="openAddressPanel()">PLACE ORDER</button>
+  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel [(expanded)]="addressPanelOpen">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Customer Details</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="CustomerForm" class="address-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullname">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput formControlName="mobile">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Type (Home/Work)</mat-label>
+          <input matInput formControlName="type">
+        </mat-form-field>
+
+        <button class="continue" *ngIf="!summeryPanelOpen" (click)="addCustomerDetails()">Continue</button>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [(expanded)]="summeryPanelOpen">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Order Summary</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="summary-cart-item" *ngFor="let item of cartItems">
+        <img [src]="item.bookImage || 'images/book4.png'" alt="Book" class="summary-img" />
+        <div class="summary-details">
+          <h4 class="summary-title">{{ item.bookName }}</h4>
+          <p class="summary-author">by {{ item.author }}</p>
+          <span>{{ item.quantity }}</span>
+          <div class="summary-price">
+            <span class="summary-current-price">Rs. {{ item.price }}</span>
+            <span class="summary-original-price">Rs. {{ item.originalPrice || item.price + 500 }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-totals">
+        <div><strong>Total Items:</strong> {{ totalQuantity }}</div>
+        <div><strong>Total Cost:</strong> Rs. {{ totalCost }}</div>
+      </div>
+
+      <div class="summary-footer">
+        <button class="checkout" (click)="placeOrder()">Checkout</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

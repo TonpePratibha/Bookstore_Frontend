@@ -4,7 +4,7 @@ import { Component, OnInit} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BookService } from '../../Services/Book/book.service';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 import { SharedService } from '../../Services/Shared/shared.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   
   searchQuery: string = ''; // Property to store search query
   cartCount=0;
-  
+  firstname:string='';
 
   constructor(private router: Router, private snackBar: MatSnackBar, private books: BookService,private sharedservice:SharedService) {}
 
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
       this.cartCount = count;
     });
     this.sharedservice.updateCartCountFromBackend();
+    this.firstname=this.sharedservice.getFirstName();
   
   }
 
@@ -35,19 +36,16 @@ export class DashboardComponent implements OnInit {
   searchBooks() {
     this.sharedservice.setSearchQuery(this.searchQuery);
   }
-showProfilePanel = false;
 
-toggleProfilePanel() {
-  this.showProfilePanel = !this.showProfilePanel;
+
+
+  showProfileCard = false;
+
+toggleProfileCard() {
+  this.showProfileCard = !this.showProfileCard;
 }
 
-
-  
-
-  toggleLogoutText() {
-    this.showLogoutText = !this.showLogoutText;
-  }
-
+ 
   OnLogout() {
     localStorage.removeItem("token");
     this.router.navigateByUrl('/registerlogin');
@@ -61,11 +59,7 @@ login() {
   this.router.navigate(['/login']);
 }
 
-logout() {
-  // Clear tokens/session
-  this.isLoggedIn = false;
-  this.router.navigate(['/registerlogin']);
-}
+
 
 goToOrders() {
   this.router.navigate(['/dashboard/order']);

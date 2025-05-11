@@ -7,22 +7,33 @@ import { CartService } from '../Cart/cart.service';
 })
 export class SharedService {
 
-  private searchQuerySubject = new BehaviorSubject<string>('');
+  private searchQuerySubject = new BehaviorSubject<string>('');  //search
   searchQuery$ = this.searchQuerySubject.asObservable();
 
-private searcquertysubject=new BehaviorSubject<string>('');
-searchquery$=this.searchQuerySubject.asObservable();
-
-
-  private cartItems: any[] = [];
  
-  private cartCount = new BehaviorSubject<number>(0);
+  private cartCount = new BehaviorSubject<number>(0);  //cart
   cartCount$ = this.cartCount.asObservable();
 
-private cartRefreshTrigger=new BehaviorSubject<void>(undefined)
-cartRefresh$=this.cartRefreshTrigger.asObservable();
+private cartRefreshTrigger=new BehaviorSubject<void>(undefined)   //refresh
+cartRefresh$=this.cartRefreshTrigger.asObservable();  
+private firstname:string='';
+ constructor(private cartService:CartService){}
 
-  constructor(private cartService:CartService){}
+
+setFirstname(name:string){
+  this.firstname=name;
+   localStorage.setItem('firstname', name);
+}
+getFirstName():string{
+if (!this.firstname) {
+      this.firstname = localStorage.getItem('firstname') || '';
+    }
+    return this.firstname;
+  
+}
+
+
+ 
   
   setSearchQuery(query: string) {
     this.searchQuerySubject.next(query);

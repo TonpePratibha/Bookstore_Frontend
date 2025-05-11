@@ -19,14 +19,19 @@
           <p class="author">by {{ item.author }}</p>
           <p class="quantity">{{ item.quantity }}</p>
           <p class="price">
-            Rs. {{ item.totalPrice }}
-            <span class="original-price">Rs. {{ item.originalPrice }}</span>
+            Rs. {{ item.price }}
+            
           </p>
         </div>
-        <div class="order-date">
-          <!-- <p class="placed-on">remove</p> -->
+        <!-- <div class="order-date">
+          
           <mat-icon class="delete-icon" aria-hidden="true" (click)="removeFromWishlist(item.bookId)">delete</mat-icon>
-        </div>
+        </div> -->
+        <div class="tooltip-wrapper" (click)="removeFromWishlist(item.bookId)">
+  <mat-icon class="delete-icon" aria-hidden="true">delete</mat-icon>
+  <span class="tooltip-text">Delete</span>
+</div>
+
       </div>
     </div>
   </div>

@@ -21,11 +21,11 @@
           <p class="quantity">{{ order.quantity }}</p>
           <p class="price">
             Rs. {{ order.totalPrice }}
-            <span class="original-price">Rs. {{ order.originalPrice }}</span>
+            <!-- <span class="original-price">Rs.{{ order.originalPrice || order.price + 500 }}</span> -->
           </p>
         </div>
         <div class="order-date">
-          <p class="placed-on">✔ Order Placed on {{ order.placedDate }}</p>
+          <p class="placed-on">✔ Order Placed on {{ order.orderdate |date }}</p>
         </div>
       </div>
     </div>

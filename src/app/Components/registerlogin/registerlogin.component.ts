@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../Services/User/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedService } from '../../Services/Shared/shared.service';
 
 @Component({
   selector: 'app-registerlogin',
@@ -16,7 +17,7 @@ export class RegisterloginComponent  implements OnInit{
   loginForm!: FormGroup;
   RegisterForm!: FormGroup;
 
-  constructor(private user: UserService, private formbuilder: FormBuilder,private snackbar:MatSnackBar,private router:Router) {}
+  constructor(private user: UserService, private formbuilder: FormBuilder,private snackbar:MatSnackBar,private router:Router,private sharedservice:SharedService) {}
 
   togglePassword() {
     this.hidePassword = !this.hidePassword;
@@ -71,8 +72,11 @@ export class RegisterloginComponent  implements OnInit{
         let token = res.response.token;
         console.log('Login Success:', res);
         localStorage.setItem("token", token);
-        console.log("token", token);
+        localStorage.setItem('firstname', res.response.firstName);
+       this.sharedservice.setFirstname(res.response.firstName);
 
+        console.log("token", res.response.firstName);
+        
         this.router.navigate(['/dashboard']);
         this.snackbar.open('Login Successful!', 'Close', {
           duration: 1000,
@@ -117,5 +121,11 @@ export class RegisterloginComponent  implements OnInit{
       }
     });
   }
+
+
+  setFirstname(){
+    
+  }
+
 
 }

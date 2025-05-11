@@ -85,7 +85,7 @@ body {
 
 .header-buttons {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   margin-left: auto;
   align-items: center;
   padding-right: 4%;
@@ -431,71 +431,278 @@ body {
 
 }
 
+// .profile-wrapper {
+//   position: relative;
+//   display: inline-block;
+//   text-align: center;
+
+//   .icon-button {
+//     display: flex;
+//     align-items: center;
+//     gap: 5px;
+//   }
+// }
+
+
+//   .profile-menu  {
+//     padding: 16px 16px;
+//     width: 900px !important;
+//     margin:30%;
+//      color: white !important;
+//     //  width:30% !important;
+//      padding-left: 10%;
+    
+//   }
+  
+//   .menu-header h3 {
+//     margin: 0;
+//     padding:10px;
+//     font-weight: 600;
+//     background-color: white !important;
+//   }
+  
+//   .menu-header p {
+//     margin: 4px 0 12px;
+//     font-size: 13px;
+//     color: #fbeded;
+//     padding:25px;
+//   }
+  
+//   .full-width {
+//     width: 80%;
+//     padding: 20%;
+//   }
+//   .logout{
+//     display: block;
+  
+//     border:1px solid red;
+//     background-color: white !important;
+    
+//     text-align: center;
+//   }
+
+// .orders{
+//   background-color: white !important;
+// }
+
+// .wishlist{
+//   background-color: white !important;
+// }
+  
+// ::ng-deep .mat-menu-panel.profile-menu {
+//   width: 900px !important;
+//   padding: 16px 32px !important;
+//   background-color: white !important;
+//   color: black !important;
+//   border-radius: 8px;
+// }
+
+// ::ng-deep .mat-menu-content {
+//   padding: 0 24px !important;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 16px;
+// }
+// .mat-menu{
+//   width:800px !important;
+// }
+
+
+
+
+// .profile-wrapper {
+//   position: relative;
+//   display: inline-block;
+
+//   .icon-button {
+//     background: transparent;
+//     border: none;
+//     cursor: pointer;
+//   }
+
+//   .profile-card {
+//     position: absolute;
+//     top: 100%;
+//     right: 0;
+//     width: 280px;
+//     background: #ffffff;
+//     border-radius: 4px;
+//     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+//     padding: 16px;
+//     z-index: 1000;
+//   }
+
+//   .menu-header h3 {
+//     margin: 0 0 16px;
+//     font-weight: 600;
+//     color: #333;
+//   }
+
+//   .menu-item {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+//     padding: 10px 0;
+//     font-size: 15px;
+//     color: #555;
+//     cursor: pointer;
+//   }
+
+//   .menu-item mat-icon {
+//     font-size: 20px;
+//     color: #555;
+//   }
+
+//   .logout-button {
+//     margin-top: 20px;
+//     padding: 10px 16px;
+//     border: 1px solid #b71c1c;
+//     color: #b71c1c;
+//     text-align: center;
+//     font-weight: 500;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     transition: background-color 0.2s ease;
+//   }
+
+//   .logout-button:hover {
+//     background-color: #fce4e4;
+//   }
+// }
+
+
+// .profile-wrapper {
+//   position: relative;
+//   display: inline-block;
+ 
+
+//   .icon-button {
+//     background: transparent;
+//     border: none;
+//     cursor: pointer;
+//   }
+
+//   .profile-card {
+//     position: absolute;
+//      margin-top: 15px;
+//     top: 100%;
+//     right: 0;
+//     width: 200px; // Reduced width
+//     background: #ffffff;
+//     border-radius: 4px;
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+//     padding: 10px 10px;
+//     z-index: 1000;
+//   }
+
+//   .menu-header h3 {
+//     margin: 0 0 12px;
+//     font-size: 14px; // Smaller font
+//     font-weight: 600;
+//     color: #333;
+//   }
+
+//   .menu-item {
+//     display: flex;
+//     align-items: center;
+//     gap: 8px;
+//     padding: 8px 0;
+//     font-size: 13px; // Smaller text
+//     color: #555;
+//     cursor: pointer;
+//   }
+
+//   .menu-item mat-icon {
+//     font-size: 18px; // Smaller icon
+//     color: #555;
+//   }
+
+//   .logout-button {
+//     margin-top: 16px;
+//     padding: 8px 12px;
+//     font-size: 13px;
+//     border: 1px solid #b71c1c;
+//     color: #b71c1c;
+//     text-align: center;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     transition: background-color 0.2s ease;
+//   }
+
+//   .logout-button:hover {
+//     background-color: #fce4e4;
+//   }
+// }
+
+
 .profile-wrapper {
   position: relative;
   display: inline-block;
-  text-align: center;
+    margin-top: 9px;
 
   .icon-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+
+  .profile-card {
+    position: absolute;
+    margin-top: 12px;
+    top: 100%;
+    left: 50%; // Center horizontally
+    transform: translateX(-50%); // Align center
+    width: 210px;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1;
+    
+  }
+
+  .menu-header h3 {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .menu-item {
     display: flex;
     align-items: center;
-    gap: 5px;
-  }
-}
+    gap: 8px;
+    padding: 8px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    border-radius: 4px;
 
-.profile-menu{
-  padding:0%;
-     color: white !important;
-     width:30% !important;
+    &:hover {
+      background-color: #ffeaea; // Faint red on hover
+    }
+  }
 
+  .menu-item mat-icon {
+    font-size: 19px;
+    color: #555;
+  }
 
-      
-
-}
-  .profile-menu .menu-header {
-    padding: 16px;
-    width: 400px;
-    margin:20%;
-    
-  }
-  
-  .menu-header h3 {
-    margin: 0;
-    padding:10px;
-    font-weight: 600;
-    background-color: white !important;
-  }
-  
-  .menu-header p {
-    margin: 4px 0 12px;
-    font-size: 13px;
-    color: #fbeded;
-    padding:25px;
-  }
-  
-  .full-width {
-    width: 80%;
-    padding: 20%;
-  }
-  .logout{
-    display: block;
-  
-    border:1px solid red;
-    background-color: white !important;
-    
+  .logout-button {
+    margin-top: 16px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
     text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #fce4e4;
+    }
   }
-
-.orders{
-  background-color: white !important;
 }
-
-.wishlist{
-  background-color: white !important;
-}
-  
-
-
-
-  
-

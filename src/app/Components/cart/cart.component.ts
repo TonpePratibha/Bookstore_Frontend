@@ -165,6 +165,40 @@ trackByBookId(index: number, item: any): number {
     
   }
 
+
+
+
+
+removeItem(bookId: number): void {
+ 
+    this.cartService.removeItem(bookId).subscribe({
+      next: (response) => {
+        console.log('Item removed successfully:', response);
+        
+      //  this.sharedservice.triggerCartRefresh();
+        this.fetchCartItems();
+        
+       
+        this.snackbar.open('Item removed from cart', 'Close', {
+          duration: 2000,
+          panelClass: ['success-snackbar'],
+        });
+      },
+      error: (error) => {
+        console.error('Error removing item:', error);
+        
+       
+        this.snackbar.open('Failed to remove item from cart', 'Close', {
+          duration: 2000,
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
+  }
+
+
+
+
   openSummeryPanel(){
     this.addressPanelOpen=true;
     this.summeryPanelOpen=true;
