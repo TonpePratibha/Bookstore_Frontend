@@ -19,6 +19,8 @@ export class BookdetailsComponent implements OnInit{
   isAddedToBag: boolean = false;
   quantity: number = 1;
 firstname:string='';
+  selectedImage: string = '';
+  reviewText = '';
 
 constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
   private cartservice:CartService,private wishlistservice:WishlistService){}
@@ -115,7 +117,7 @@ decreaseQuantity(item: any) {
 }
 
 
-  selectedImage: string = '';
+
 
   setMainImage(imageUrl: string): void {
     this.selectedImage = imageUrl;
@@ -123,7 +125,7 @@ decreaseQuantity(item: any) {
   
 //feedback part static
   //rating = 0;
-reviewText = '';
+
 feedbackList = [
   { name: 'Aniket Chile', rating: 4, comment: 'Good product. Even though the translation could have been better...' },
   { name: 'Shweta Bodkar', rating: 4, comment: 'Chanakya’s neat and succinct writings are thought-provoking.' }

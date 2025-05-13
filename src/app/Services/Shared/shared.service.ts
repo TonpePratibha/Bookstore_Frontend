@@ -7,8 +7,8 @@ import { CartService } from '../Cart/cart.service';
 })
 export class SharedService {
 
-  private searchQuerySubject = new BehaviorSubject<string>('');  //search
-  searchQuery$ = this.searchQuerySubject.asObservable();
+  private searchQuerySubject = new BehaviorSubject<string>('');  //search  stores latest value
+  searchQuery$ = this.searchQuerySubject.asObservable();  //readonly for consumer
 
  
   private cartCount = new BehaviorSubject<number>(0);  //cart
@@ -16,7 +16,9 @@ export class SharedService {
 
 private cartRefreshTrigger=new BehaviorSubject<void>(undefined)   //refresh
 cartRefresh$=this.cartRefreshTrigger.asObservable();  
+
 private firstname:string='';
+
  constructor(private cartService:CartService){}
 
 
@@ -36,7 +38,7 @@ if (!this.firstname) {
  
   
   setSearchQuery(query: string) {
-    this.searchQuerySubject.next(query);
+    this.searchQuerySubject.next(query);  //emit stream of data used to update
   }
 
 
@@ -53,12 +55,12 @@ triggerCartRefresh(){
 
   updateCartCountFromBackend() {
     this.cartService.getCart().subscribe({
-      next: (response: any) => {
+      next: (response: any) => {                      
         const count = response.items ? response.items.length : 0;
         this.cartCount.next(count);
       },
       error: () => {
-        this.cartCount.next(0); // fallback
+        this.cartCount.next(0); // fallback 
       }
     });
 

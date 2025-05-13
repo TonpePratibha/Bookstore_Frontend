@@ -31,6 +31,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 import { OrderSuccessComponent } from './Components/order-success/order-success.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatBadgeModule,
     MatExpansionModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [

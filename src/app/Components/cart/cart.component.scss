@@ -331,6 +331,7 @@
     border: 1px solid #ddd;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+   
 
     h2 {
       font-size: 20px;
@@ -528,4 +529,10 @@
     display: flex;
     justify-content: flex-end;
   }
+}
+.no-items-message {
+  text-align: center;
+  color: #888;
+  font-size: 1.2rem;
+  margin: 2rem 0;
 }

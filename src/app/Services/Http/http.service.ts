@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,11 @@ patchService(url: string, reqData: any, token: boolean = true, httpOptions: any 
 deleteService(url: string, token: boolean = true, httpOptions: any = {}) {
 return this.httpClient.delete(url, token ? httpOptions : {});
 }
+
+// getServicee<T>(url: string, token: boolean = true, httpOptions: any = {}): Observable<HttpEvent<T>> {
+//   return this.httpClient.get<T>(url, httpOptions);
+// }
+
+
 
 }

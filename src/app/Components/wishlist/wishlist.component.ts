@@ -10,7 +10,7 @@ import { SharedService } from '../../Services/Shared/shared.service';
 })
 export class WishlistComponent implements OnInit{
 wishlistArray:any[]=[];
-
+ isLoading = true;
 constructor(private wishlistservice:WishlistService,private sharedservice:SharedService){}
 
  ngOnInit(): void {
@@ -20,6 +20,7 @@ constructor(private wishlistservice:WishlistService,private sharedservice:Shared
  }
 
   getWishlistItems() {
+   
     this.wishlistservice.getWishList().subscribe({
       next: (response: any) => {
         this.wishlistArray = response.data.items.reverse().map((book:any, index:number) => ({
@@ -29,10 +30,11 @@ constructor(private wishlistservice:WishlistService,private sharedservice:Shared
         console.log(response.data.items);
         // this.filteredBooks = [...this.wishlistArray];
         // this.totalBooks = this.filteredBooks.length;
-        
+        this.isLoading = false;
       },
       error: (error) => {
         console.error("Error fetching books:", error);
+        this.isLoading = false;
       }
     });
   }

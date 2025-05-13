@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { BookService } from '../../Services/Book/book.service';
 import { PageEvent } from '@angular/material/paginator';
 import { SharedService } from '../../Services/Shared/shared.service';
-
+import { HttpEvent, HttpResponse } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
+import { response } from 'express';
 @Component({
   selector: 'app-booksdata',
   standalone: false,
@@ -16,21 +18,25 @@ export class BooksdataComponent implements OnInit {
   booksArray: any[] = [];
   pagedBooks: any[] = [];
   searchQuery:any='';
- 
+ isLoading = false;
+
 
   // Pagination properties
   pageSize = 8;
   currentPage = 0;
   totalBooks = 0;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private books: BookService,private sharedservice:SharedService) {}
+  constructor(private router: Router, private snackBar: MatSnackBar, private books: BookService,
+    private sharedservice:SharedService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getAllBooks();
-  
+
     this.sharedservice.searchQuery$.subscribe(query => {
       this.searchQuery = query;
       this.filterBooks();
+      
+    
     });
   }
   
@@ -43,47 +49,83 @@ export class BooksdataComponent implements OnInit {
     this.setPagedBooks(filteredBooks);
   }
 
+sortBooks() {
   
-  
-  sortBooks() {
-    switch (this.sortOption) {
-      case 'priceLowHigh':
-        this.booksArray.sort((a, b) => a.price - b.price);
-        break;
-      case 'priceHighLow':
-        this.booksArray.sort((a, b) => b.price - a.price);
-        break;
-      case 'newest':
-        this.booksArray.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        break;
-      default:
-        break; 
-    }
-    this.setPagedBooks(); // Update sorting
+  switch (this.sortOption) {
+    case 'priceLowHigh':
+      this.books.sortBooksAsc().subscribe({
+        next: (response: any) => this.setSortedBooks(response),
+        error: (err) => console.error("Sort Low to High error:", err)
+      });
+      break;
+
+    case 'priceHighLow':
+      this.books.sortBooksDesc().subscribe({
+        next: (response: any) => this.setSortedBooks(response),
+        error: (err) => console.error("Sort High to Low error:", err)
+        
+      });
+      break;
+
+    case 'newest':
+      this.books.getRecentBooks().subscribe({
+        next: (response: any) => this.setSortedBooks(response),
+        error: (err) => console.error("Sort Newest First error:", err)
+      });
+      break;
+
+    default:
+      //relevance
+      this.getAllBooks(false);
+      break;
   }
+}
+
+setSortedBooks(data: any[]) {
+  this.booksArray = data.map((book: any, index: number) => ({
+    ...book,
+    bookImage: `images/book${(index % 9) + 1}.png`
+  }));
+  this.currentPage = 0;
+  this.totalBooks = this.booksArray.length;
+  this.setPagedBooks();
+
+}
+
+
 
   goToDetails(id: number) {
     this.router.navigate(['/dashboard/bookdetails', id]);
   }
   
   
-  getAllBooks() {
-    this.books.getBooks().subscribe({
-      next: (response: any) => {
-        this.booksArray = response.reverse().map((book:any, index:number) => ({
-          ...book,
-          bookImage: `images/book${(index % 9) + 1}.png`
-        }));
-        console.log(response);
-        this.totalBooks = this.booksArray.length;
-        this.sortBooks()
+ 
+
+
+  getAllBooks(applySort = true) {  //getting multile calls for relevence thats why appiled flag here
+   this.isLoading = true;
+    this.books.getBooks().subscribe({ 
+    next: (response: any) => {
+      this.booksArray = response.map((book: any, index: number) => ({
+        ...book,
+        bookImage: `images/book${(index % 9) + 1}.png`
+      }));
+      this.totalBooks = this.booksArray.length;
+      
+      if (applySort) {
+        this.sortBooks();  // Only sort if flag is true
+      } else {
         this.setPagedBooks();
-      },
-      error: (error) => {
-        console.error("Error fetching books:", error);
+         this.isLoading = false;
+      
       }
-    });
-  }
+    },
+    error: (error) => {
+      console.error("Error fetching books:", error);
+      this.isLoading = false;
+    }
+  });
+}
 
 
  
@@ -91,6 +133,8 @@ export class BooksdataComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.setPagedBooks();
+    // this.loadPageFromAPI();
+  
   }
 
   
@@ -108,12 +152,14 @@ setPagedBooks(filteredBooks: any[] = this.booksArray) {
 goToPage(pageIndex: number) {
   this.currentPage = pageIndex;
   this.setPagedBooks();
+ 
 }
 
 goToPreviousPage() {
   if (this.currentPage > 0) {
     this.currentPage--;
     this.setPagedBooks();
+   
   }
 }
 
@@ -121,10 +167,17 @@ goToNextPage() {
   if (this.currentPage < this.maxPage - 1) {
     this.currentPage++;
     this.setPagedBooks();
+   
   }
 }
 
 getPageNumbers(): number[] {
   return Array(this.maxPage).fill(0).map((_, i) => i);
 }
+
+
+
+
+
+
 }

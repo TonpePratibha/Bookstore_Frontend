@@ -15,7 +15,7 @@ import { SharedService } from '../../Services/Shared/shared.service';
 })
 export class DashboardComponent implements OnInit {
   
-  searchQuery: string = ''; // Property to store search query
+  searchQuery: string = ''; 
   cartCount=0;
   firstname:string='';
 
@@ -53,12 +53,7 @@ toggleProfileCard() {
   }
  
 
-  isLoggedIn = false; // Set this based on your login state
-
-login() {
-  this.router.navigate(['/login']);
-}
-
+ 
 
 
 goToOrders() {

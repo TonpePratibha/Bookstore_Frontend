@@ -123,9 +123,7 @@ export class RegisterloginComponent  implements OnInit{
   }
 
 
-  setFirstname(){
-    
-  }
+ 
 
 
 }

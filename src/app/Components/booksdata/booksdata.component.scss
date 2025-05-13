@@ -239,3 +239,14 @@
       justify-content: center;
     }
   }
+  .spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; // adjust as needed
+  width: 100%;
+  
+}
+::ng-deep mat-spinner circle {
+  stroke: #a52a2a; /* Brown color */
+}

@@ -37,7 +37,7 @@ ngOnInit(): void {
     fullname: ['', [Validators.required, Validators.minLength(3),Validators.pattern(/^[A-Za-z\s]+$/)]],
     mobile: ['',[Validators.required, Validators.pattern('^[0-9]{10}$')]],
     address: ['',Validators.required],
-    city: ['', [Validators.required, Validators.minLength(6)]],
+    city: ['', [Validators.required, Validators.minLength(4)]],
     state:['', [Validators.required,Validators.pattern(/^[A-Za-z\s]+$/)]],
    type:['', [Validators.required, Validators.minLength(3),Validators.pattern(/^[A-Za-z\s]+$/)]],
     

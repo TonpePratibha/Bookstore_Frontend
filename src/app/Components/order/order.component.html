@@ -1,6 +1,8 @@
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner diameter="60"></mat-spinner>
+</div>
 
-
-<div class="order-page">
+<div class="order-page" *ngIf="!isLoading">
   <div class="breadcrumb">
     <a routerLink="/dashboard/home">Home</a> / 
     <span class="active">My orders</span>

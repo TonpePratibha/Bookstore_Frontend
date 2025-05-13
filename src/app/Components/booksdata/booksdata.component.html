@@ -1,5 +1,8 @@
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
 
-<div class="bookscontainer">
+<div class="bookscontainer" *ngIf="!isLoading">
     <div class="books-header">
       
       <div class="books-title">

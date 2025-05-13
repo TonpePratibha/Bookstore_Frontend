@@ -9,7 +9,7 @@ import { OrderService } from '../../Services/Order/order.service';
 })
 export class OrderComponent implements OnInit {
  ordersArray :any[]=[];
-
+isLoading = true;
 constructor(private orderService:OrderService){}
 
 
@@ -29,11 +29,12 @@ getOrders() {
           ...book,
           bookImage: `images/book${(index % 9) + 1}.png`
         }));
-
+      this.isLoading = false;
       console.log(this.ordersArray);
     },
     error: (error) => {
       console.error("Error fetching books:", error);
+      this.isLoading=false;
     }
   });
 }
