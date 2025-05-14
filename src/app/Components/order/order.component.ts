@@ -25,10 +25,10 @@ getOrders() {
     next: (response: any) => {
       this.ordersArray = response.data
         .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()) 
-        .map((book: any, index: number) => ({
-          ...book,
-          bookImage: `images/book${(index % 9) + 1}.png`
-        }));
+        // .map((book: any, index: number) => ({
+        //   ...book,
+        //   //bookImage: `images/book${(index % 9) + 1}.png`
+        // }));
       this.isLoading = false;
       console.log(this.ordersArray);
     },

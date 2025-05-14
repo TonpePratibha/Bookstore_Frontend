@@ -84,7 +84,7 @@ sortBooks() {
 setSortedBooks(data: any[]) {
   this.booksArray = data.map((book: any, index: number) => ({
     ...book,
-    bookImage: `images/book${(index % 9) + 1}.png`
+    // bookImage: `images/book${(index % 9) + 1}.png`
   }));
   this.currentPage = 0;
   this.totalBooks = this.booksArray.length;
@@ -106,10 +106,7 @@ setSortedBooks(data: any[]) {
    this.isLoading = true;
     this.books.getBooks().subscribe({ 
     next: (response: any) => {
-      this.booksArray = response.map((book: any, index: number) => ({
-        ...book,
-        bookImage: `images/book${(index % 9) + 1}.png`
-      }));
+      this.booksArray = response;
       this.totalBooks = this.booksArray.length;
       
       if (applySort) {

@@ -38,10 +38,7 @@ constructor(private router:Router,private snackBar:MatSnackBar,private bookservi
 
   this.bookservice.getBookById(id).subscribe({
     next: (response: any) => {
-      this.book = {
-        ...response,
-        bookImage: `images/book${(id % 9) + 1}.png`  // optional: if you want to assign an image
-      };
+      this.book = response;
     },
     error: (err) => {
       console.error("Error fetching book by ID:", err);

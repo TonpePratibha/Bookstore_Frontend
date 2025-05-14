@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BookService } from '../../Services/Book/book.service';
@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
   searchQuery: string = ''; 
   cartCount=0;
   firstname:string='';
-
+  showProfileCard = false;
+ @ViewChild('profileWrapper') profileWrapper!: ElementRef;
   constructor(private router: Router, private snackBar: MatSnackBar, private books: BookService,private sharedservice:SharedService) {}
 
   showLogoutText = false;
@@ -39,7 +40,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-  showProfileCard = false;
 
 toggleProfileCard() {
   this.showProfileCard = !this.showProfileCard;
@@ -50,6 +50,7 @@ toggleProfileCard() {
     localStorage.removeItem("token");
     this.router.navigateByUrl('/registerlogin');
     this.snackBar.open("Logout Successful", '', { duration: 3000 });
+     this.showProfileCard = false;
   }
  
 
@@ -58,12 +59,19 @@ toggleProfileCard() {
 
 goToOrders() {
   this.router.navigate(['/dashboard/order']);
+   this.showProfileCard = false;
 }
 
 goToWishlist() {
   this.router.navigate(['/dashboard/wishlist']);
+   this.showProfileCard = false;
 }
 
-  
+   @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (this.profileWrapper && !this.profileWrapper.nativeElement.contains(event.target)) {
+      this.showProfileCard = false;
+    }
+  }
   
 }

@@ -25,7 +25,7 @@ constructor(private wishlistservice:WishlistService,private sharedservice:Shared
       next: (response: any) => {
         this.wishlistArray = response.data.items.reverse().map((book:any, index:number) => ({
           ...book,
-          bookImage: `images/book${(index % 9) + 1}.png`
+          //bookImage: `images/book${(index % 9) + 1}.png`
         }));
         console.log(response.data.items);
         // this.filteredBooks = [...this.wishlistArray];

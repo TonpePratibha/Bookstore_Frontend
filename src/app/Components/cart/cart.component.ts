@@ -114,6 +114,7 @@ trackByBookId(index: number, item: any): number {
 
   
   addCustomerDetails(){
+    
     this.CustomerForm.markAllAsTouched();
   
     if (this.CustomerForm.invalid) {
