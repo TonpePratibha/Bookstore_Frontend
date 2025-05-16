@@ -160,6 +160,7 @@ trackByBookId(index: number, item: any): number {
       },
       error: (error) => {
         console.error('Error placing order:', error);
+        this.snackBar.open("Not enough quantity for book", '', { duration: 2000 });
       }
     });
 
