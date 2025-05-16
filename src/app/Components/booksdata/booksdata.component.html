@@ -27,13 +27,10 @@
      [routerLink]="book.quantity > 0 ? ['/dashboard/bookdetails', book.id] : null"
      [class.no-click]="book.quantity === 0">
 
-        <!-- <div class="book-image">
-          <img [src]="book.bookImage" alt="Book Image" /> -->
+        
            <div class="book-image-wrapper">
       <img [src]="book.bookImage" alt="Book Image" class="book-image" />
-             <!-- <div class="out-of-stock-overlay" *ngIf="book.quantity === 0">
-        OUT OF STOCK
-      </div> -->
+         
       <div *ngIf="book.quantity === 0" class="stock-overlay">
         OUT OF STOCK
       </div>
