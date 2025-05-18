@@ -5,6 +5,7 @@ import { BookService } from '../../Services/Book/book.service';
 import { SharedService } from '../../Services/Shared/shared.service';
 import { CartService } from '../../Services/Cart/cart.service';
 import { WishlistService } from '../../Services/Wishlist/wishlist.service';
+import { FeedbackService } from '../../Services/Feedback/feedback.service';
 
 @Component({
   selector: 'app-bookdetails',
@@ -18,13 +19,15 @@ export class BookdetailsComponent implements OnInit{
   book:any;
   isAddedToBag: boolean = false;
   quantity: number = 1;
-firstname:string='';
+  firstname:string='';
   selectedImage: string = '';
   reviewText = '';
   isLoading = false;
+  feedbackList: any[] = [];
+
 
 constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
-  private cartservice:CartService,private wishlistservice:WishlistService){}
+  private cartservice:CartService,private wishlistservice:WishlistService,private feedbackservice:FeedbackService){}
 
   
   ngOnInit(): void {
@@ -42,6 +45,7 @@ constructor(private router:Router,private snackBar:MatSnackBar,private bookservi
     next: (response: any) => {
       this.book = response;
       this.isLoading = false;
+       this.getFeedbacks(this.book.id);
     },
     error: (err) => {
       console.error("Error fetching book by ID:", err);
@@ -133,29 +137,54 @@ decreaseQuantity(item: any) {
     this.selectedImage = imageUrl;
   }
   
-//feedback part static
-  //rating = 0;
 
-feedbackList = [
-  { name: 'Aniket Chile', rating: 4, comment: 'Good product. Even though the translation could have been better...' },
-  { name: 'Shweta Bodkar', rating: 4, comment: 'Chanakya’s neat and succinct writings are thought-provoking.' }
-];
+
+
+
+getFeedbacks(bookId: number) {
+  this.feedbackservice.getFeedback(bookId).subscribe({
+    next: (res: any) => {
+      this.feedbackList = res.data; // assuming API sends {; data: [...] }
+      console.log(res);
+    },
+    error: (err) => {
+      console.error('Failed to load feedbacks:', err);
+    }
+  });
+}
+submitReview(): void {
+  if (!this.reviewText || !this.rating) {
+    this.snackBar.open("Rating and review are required", '', { duration: 2000 });
+    return;
+  }
+
+  const payload = {
+    bookId: this.book.id,
+    rating: this.rating,
+    review: this.reviewText
+  };
+
+  this.feedbackservice.addFeedback(payload).subscribe({
+    next: (res: any) => {
+      this.snackBar.open('Feedback submitted!', '', { duration: 2000 });
+      this.reviewText = '';
+      this.rating = 0;
+      this.getFeedbacks(this.book.id); // reload latest feedbacks
+      console.log(res);
+    },
+    error: (err) => {
+      const msg = err?.error?.message || 'Error submitting feedback.';
+      this.snackBar.open(msg, '', { duration: 2000 });
+    }
+  });
+}
+
 
 setRating(star: number): void {
   this.rating = star;
 }
 
 
-submitReview(): void {
-  if (this.reviewText && this.rating) {
-    this.feedbackList.unshift({
-      name: this.firstname, 
-      rating: this.rating,
-      comment: this.reviewText
-    });
-    this.reviewText = '';
-    this.rating = 0;
-  }
-}
+
 
 }

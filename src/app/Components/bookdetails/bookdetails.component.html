@@ -63,35 +63,46 @@
         <h4>*Book Detail</h4>
         <p>{{ book.description }}</p>
       </div>
-  
-      <div class="feedback-section">
-        <h4>Customer Feedback</h4>
-        
-        <div class="rating-stars">
-          <mat-icon *ngFor="let star of [1,2,3,4,5]" (click)="setRating(star)" [ngClass]="{'active': star <= rating}">
+
+      
+
+<div class="feedback-section">
+  <h4>Customer Feedback</h4>
+
+  <div class="rating-stars">
+    <mat-icon *ngFor="let star of [1,2,3,4,5]" (click)="setRating(star)" [ngClass]="{'active': star <= rating}">
+      star
+    </mat-icon>
+  </div>
+
+  <textarea placeholder="Write your review" [(ngModel)]="reviewText"></textarea>
+  <button class="submit-review" (click)="submitReview()">Submit</button>
+
+  <div class="no-items-message" *ngIf="feedbackList.length === 0">
+    <p>No feedbacks yet. Be the first to review!</p>
+  </div>
+
+  <div class="reviews-list">
+    <div class="review-item" *ngFor="let feedback of feedbackList">
+      <div class="avatar">{{ feedback.firstname[0] }}{{ feedback.lastname[0] }}</div>
+      <div class="review-content">
+        <strong>{{ feedback.firstname }} {{ feedback.lastname }}</strong>
+        <div class="stars">
+          <mat-icon *ngFor="let star of [1,2,3,4,5]" [ngClass]="{'active': star <= feedback.rating}">
             star
           </mat-icon>
+          <!-- DEBUG: show actual rating -->
+
+
+
         </div>
-      
-        <textarea placeholder="Write your review" [(ngModel)]="reviewText"></textarea>
-        <button class="submit-review" (click)="submitReview()">Submit</button>
-      
-        <div class="reviews-list">
-          <div class="review-item" *ngFor="let feedback of feedbackList">
-            <div class="avatar">{{ feedback.name[0] }}</div>
-            <div class="review-content">
-              <strong>{{ feedback.name }}</strong>
-              <div class="stars">
-                <mat-icon *ngFor="let star of [1,2,3,4,5]" [ngClass]="{'active': star <= feedback.rating}">
-                  star
-                </mat-icon>
-              </div>
-              <p>{{ feedback.comment }}</p>
-            </div>
-          </div>
-        </div>
+        <p>{{ feedback.review }}</p>
       </div>
-      
+    </div>
+  </div>
+</div>
+
+
     </div>
   </div>
   

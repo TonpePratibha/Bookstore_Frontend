@@ -38,7 +38,8 @@ ngOnInit(): void {
   filterBooks() {
     const filteredBooks = this.ordersArray.filter(book =>
       book.bookName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      book.author.toLowerCase().includes(this.searchQuery.toLowerCase())
+      book.author.toLowerCase().includes(this.searchQuery.toLowerCase())|| 
+      (book.orderdate && book.orderdate.toLowerCase().includes(this.searchQuery.toLowerCase())) 
     );
     this.totalBooks = filteredBooks.length;
     this.setPagedBooks(filteredBooks);
