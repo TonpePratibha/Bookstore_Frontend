@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../Services/User/user.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { SharedService } from '../../Services/Shared/shared.service';
   standalone: false,
   templateUrl: './registerlogin.component.html',
   styleUrl: './registerlogin.component.scss'
+  
 })
 export class RegisterloginComponent  implements OnInit{
   isSignup: boolean = false;
@@ -85,6 +86,10 @@ export class RegisterloginComponent  implements OnInit{
       },
       (error) => {
         console.error('Login Error:', error);
+         this.snackbar.open('fecing error for login!', 'Close', {
+          duration: 1000,
+          panelClass: ['error-snackbar']
+        });
       }
     );
   }
@@ -118,6 +123,13 @@ export class RegisterloginComponent  implements OnInit{
       
       error: (err) => {
         console.error("Registration Failed:", err);
+        
+
+this.snackbar.open('Please fill the form correctly', 'Close', {
+  duration: 2000,
+  panelClass: ['error-snackbar']
+});
+
       }
     });
   }

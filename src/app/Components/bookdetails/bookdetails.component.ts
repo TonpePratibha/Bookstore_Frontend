@@ -21,6 +21,7 @@ export class BookdetailsComponent implements OnInit{
 firstname:string='';
   selectedImage: string = '';
   reviewText = '';
+  isLoading = false;
 
 constructor(private router:Router,private snackBar:MatSnackBar,private bookservice:BookService,private route:ActivatedRoute,private sharedservice:SharedService,
   private cartservice:CartService,private wishlistservice:WishlistService){}
@@ -34,14 +35,17 @@ constructor(private router:Router,private snackBar:MatSnackBar,private bookservi
   }
 
   getBookDetails(){
+    this.isLoading = true;
   const id = Number(this.route.snapshot.paramMap.get('id'));
 
   this.bookservice.getBookById(id).subscribe({
     next: (response: any) => {
       this.book = response;
+      this.isLoading = false;
     },
     error: (err) => {
       console.error("Error fetching book by ID:", err);
+      this.isLoading = false;
     }
   });
 }
@@ -55,12 +59,21 @@ addToBag() {
   
   this.cartservice.addToCart(this.book.id).subscribe({
     next: (res) => {
-      this.snackBar.open("Book added to cart!", '', { duration: 2000 });
+      // this.snackBar.open("Book added to cart!", '', { duration: 2000 });
+        this.snackBar.open('Book added to cart!', 'Close', {
+        duration: 2000,
+        panelClass: 'success-snackbar'
+      });
+      
       this.sharedservice.updateCartCountFromBackend()// updates the badge
     },
     error: (err) => {
       console.error("Error adding to cart:", err);
-      this.snackBar.open("Failed to add to cart", '', { duration: 2000 });
+      // this.snackBar.open("Failed to add to cart", '', { duration: 2000 });
+       this.snackBar.open('Failed to add to cart', 'Close', {
+        duration: 2000,
+        panelClass: 'error-snackbar'
+      });
     }
   });
 }

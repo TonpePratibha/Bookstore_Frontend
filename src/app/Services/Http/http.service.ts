@@ -35,9 +35,7 @@ deleteService(url: string, token: boolean = true, httpOptions: any = {}) {
 return this.httpClient.delete(url, token ? httpOptions : {});
 }
 
-// getServicee<T>(url: string, token: boolean = true, httpOptions: any = {}): Observable<HttpEvent<T>> {
-//   return this.httpClient.get<T>(url, httpOptions);
-// }
+
 
 
 

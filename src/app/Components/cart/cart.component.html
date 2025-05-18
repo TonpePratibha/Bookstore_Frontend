@@ -1,42 +1,25 @@
 
 
 
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
 
+<div class="cart-container" *ngIf="!isLoading">
+  
 
-<div class="cart-container">
   <div class="breadcrumb">
     <a routerLink="/dashboard/home">Home</a> /
     <span class="active">My cart</span>
   </div>
-
-  <div class="cart-box">
-    <h2>My cart ({{ totalQuantity }})</h2>
-
-    <!-- No items message -->
-    <div class="no-items-message" *ngIf="cartItems.length === 0">
+<h2>My cart ({{ totalQuantity }})</h2>
+  <div class="no-items-message" *ngIf="cartItems.length === 0">
       Your cart is empty.
     </div>
 
-    <!-- Cart items list -->
-    <!-- <div class="cart-item" *ngFor="let item of cartItems; trackBy: trackByBookId" *ngIf="cartItems.length > 0">
-      <img [src]="item.bookImage || 'images/book4.png'" alt="Book" class="book-img" />
-      <div class="item-details">
-        <h3>{{ item.bookName }}</h3>
-        <p>by {{ item.author }}</p>
-        <div class="price">
-          <span class="current-price">Rs. {{ item.price }}</span>
-          <span class="original-price">Rs. {{ item.originalPrice || item.price + 500 }}</span>
-        </div>
-        <div class="quantity-control">
-          <button (click)="decreaseQuantity(item)" class="cartbuttons">-</button>
-          <span id="qty">{{ item.quantity }}</span>
-          <button (click)="increaseQuantity(item)" class="cartbuttons">+</button>
-          <span class="remove-text" (click)="removeItem(item.bookId)">Remove</span>
-        </div>
-      </div>
-    </div> -->
-
-<ng-container *ngIf="cartItems.length > 0">
+  <div class="cart-box" *ngIf="cartItems.length > 0">
+    
+<ng-container >
   <div class="cart-item" *ngFor="let item of cartItems; trackBy: trackByBookId">
     <img [src]="item.bookImage " alt="Book" class="book-img" />
     <div class="item-details">
@@ -59,11 +42,10 @@
 
 
 
-    <!-- Place Order button -->
     <button class="place-order" *ngIf="cartItems.length > 0 && !addressPanelOpen" (click)="openAddressPanel()">PLACE ORDER</button>
   </div>
 
-  <!-- Accordion only shown if cart is not empty -->
+  
   <mat-accordion *ngIf="cartItems.length > 0">
     <mat-expansion-panel [(expanded)]="addressPanelOpen">
       <mat-expansion-panel-header>
@@ -99,7 +81,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Type (Home/Work)</mat-label>
           <input matInput formControlName="type">
-        </mat-form-field>
+        </mat-form-field> 
 
         <button class="continue" *ngIf="!summeryPanelOpen" (click)="addCustomerDetails()">Continue</button>
       </form>
@@ -115,7 +97,7 @@
         <div class="summary-details">
           <h4 class="summary-title">{{ item.bookName }}</h4>
           <p class="summary-author">by {{ item.author }}</p>
-          <span>{{ item.quantity }}</span>
+          <span>quantity- <span class="qty">{{ item.quantity }}</span></span>
           <div class="summary-price">
             <span class="summary-current-price">Rs. {{ item.price }}</span>
             <span class="summary-original-price">Rs. {{ item.originalPrice || item.price + 500 }}</span>

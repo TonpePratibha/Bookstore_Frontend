@@ -1,9 +1,7 @@
 
-
-
 .order-page {
   padding: 2rem 1rem 4rem;
-  min-height: 80vh; // Ensures page has enough height even if empty
+  min-height: 80vh;
 
   @media (min-width: 768px) {
     padding: 3rem 4rem;
@@ -16,8 +14,8 @@
 
   .order-header {
     text-align: left;
-    margin-bottom: 1rem;
-    margin-top: 2rem; // Add if space from top is needed
+    margin: 2rem 0 1rem;
+
     h2 {
       font-size: 1.8rem;
       font-weight: bold;
@@ -36,50 +34,56 @@
 
     .order-card {
       display: flex;
-      flex-direction: column;
+      flex-direction: row; // Always horizontal
+      align-items: center;  // center vertical alignment
       flex-wrap: wrap;
       background: #fff;
       padding: 1rem;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
-      @media (min-width: 600px) {
-        flex-direction: row;
-        align-items: center;
-      }
+      .book-image {
+        flex: 0 0 auto;
+        margin-right: 1rem;
+        margin-bottom: 0;
 
-      .book-image img {
-        height: 100px;
-        width: 70px;
-        object-fit: cover;
-        margin-bottom: 1rem;
-
-        @media (min-width: 600px) {
-          margin-bottom: 0;
-          margin-right: 1.5rem;
+        img {
+          height: 120px;
+          width: 90px;
+          object-fit: cover;
         }
       }
 
       .book-details {
-        flex: 1;
+        flex: 1 1 auto;
+        min-width: 150px;
+        font-size: 1rem;    // default font size for larger screens
+        line-height: 1.4;   // default line height for larger screens
+        margin-bottom: 0;   // default margin
 
         h3 {
           font-size: 1.2rem;
-          margin: 0;
+          margin: 0 0 0.3rem 0;
+          font-weight: 600;
         }
 
         .author {
           font-style: italic;
           color: #888;
+          margin: 0 0 0.3rem 0;
         }
 
         .quantity {
-          margin-top: 0.5rem;
+          margin: 0 0 0.3rem 0;
           font-weight: normal;
         }
 
+        .qty {
+          font-weight: bold !important;
+        }
+
         .price {
-          margin-top: 0.5rem;
+          margin: 0;
           font-weight: bold;
 
           .original-price {
@@ -92,28 +96,24 @@
       }
 
       .order-date {
+        font-size: 0.9rem;
         color: red;
         font-weight: bold;
-        font-size: 0.9rem;
         white-space: nowrap;
-        margin-top: 1rem;
+        margin-left: auto;
+        margin-top: 0.5rem;
 
-        @media (min-width: 600px) {
-          margin-top: 0;
-          margin-left: auto;
+        @media (max-width: 599px) {
+          margin-left: 0;
         }
       }
 
       .tooltip-wrapper {
         position: relative;
-        display: inline-block;
+        margin-left: 1rem;
         margin-top: 0.5rem;
-
-        @media (min-width: 600px) {
-          margin-left: 1rem;
-          margin-top: 0;
-          
-        }
+        display: flex;
+        align-items: center;
 
         .delete-icon {
           color: red;
@@ -147,6 +147,33 @@
   }
 }
 
+// ** Responsive tweaks for small screens only **
+@media (max-width: 599px) {
+  .order-card {
+    flex-direction: row;
+    align-items: center;
+
+    .book-details {
+      font-size: 0.85rem !important;
+      line-height: 1.2 !important;
+      
+      h3 {
+        font-size: 1rem !important;
+        margin-bottom: 0.15rem !important;
+      }
+
+      .author,
+      .quantity {
+        margin-bottom: 0.15rem !important;
+      }
+
+      .price {
+        margin-top: 0 !important;
+      }
+    }
+  }
+}
+
 .breadcrumb a {
   text-decoration: none;
   color: #5f6368;
@@ -160,21 +187,68 @@
   font-weight: bold;
   color: #202124;
 }
- .spinner-container {
+
+.spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh; // adjust as needed
+  height: 60vh;
   width: 100%;
-  
-}
-::ng-deep mat-spinner circle {
-  stroke: #a52a2a; /* Brown color */
 }
 
- .no-items-message {
-    font-size: 1.2rem;
-    color: #888;
-    padding: 2rem 0;
-    text-align: center;
+::ng-deep mat-spinner circle {
+  stroke: #a52a2a;
+}
+
+.no-items-message {
+  font-size: 1.2rem;
+  color: #888;
+  padding: 2rem 0;
+  text-align: center;
+}
+.paginator-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding: 30px 0;
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .page-btn,
+  .arrow-btn {
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    color: #333;
+  }
+  
+  .page-btn:hover,
+  .arrow-btn:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .page-btn.active {
+    background-color: #8b2c2c;
+    color: white;
+  }
+  
+  .arrow-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  
+  .ellipsis {
+    padding: 0 4px;
+    font-size: 18px;
   }

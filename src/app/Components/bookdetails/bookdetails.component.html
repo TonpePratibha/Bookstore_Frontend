@@ -1,24 +1,17 @@
-
-<!-- <div class="breadcrumb">Home / <span>Book</span></div> -->
-<!-- <div class="breadcrumb">
-  <a routerLink="/dashboard/home">Home</a> / 
-  <span class="active">Book</span>
-</div> -->
-<div class="book-details-wrapper">
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
+<div class="book-details-wrapper" *ngIf="!isLoading">
   
   <div class="image-gallery">
     <div class="thumbnails">
       <img src="images/book1.png" alt="Thumb 1" (click)="setMainImage('images/book1.png')" />
       <img src="images/book2.png" alt="Thumb 2" (click)="setMainImage('images/book2.png')" />
     </div>
-    <!-- <div class="main-image">
-      <img [src]="selectedImage || book.bookImage" alt="Book Image" />
-    </div> -->
+    
   </div>
     <div class="left-section">
-      <!-- <div class="main-image">
-        <img [src]="book.bookImage" alt="Book Image" />
-      </div> -->
+     
       <div class="breadcrumb">
   <a routerLink="/dashboard/home">Home</a> / 
   <span class="active">Book</span>

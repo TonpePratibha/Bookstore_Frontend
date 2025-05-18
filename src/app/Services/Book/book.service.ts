@@ -73,47 +73,6 @@ export class BookService {
     return this.http.getService("https://localhost:7264/api/books/sortprice_desc",false,headers);
   }
 
-
-  // searchBook(search:string){
-  //   let headers={
-  //     headers:new HttpHeaders({
-  //       'Content-Type':'application/json',
-  //     }),
-  //      responseType: 'json' as const
-  //   };
-  //   return this.http.getService(`https://localhost:7264/api/books/search?search=${encodeURIComponent(search)}`,false,headers)
-  // }
-
-
- 
-
-// searchBook(search: string) {
-//   const headers = {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/json',
-//     }),
-//   };
-//   return this.http.getServicee<any[]>(`https://localhost:7264/api/books/search?search=${encodeURIComponent(search)}`, headers);
-// }
-
-
-
-// searchBook(search: string) {
-//   const httpOptions = {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/json'
-//     }),
-//     responseType: 'json' as const
-//   };
-
-//   return this.http.getServicee<any[]>(
-//     `https://localhost:7264/api/books/search?search=${search}`,
-//     false,
-//     httpOptions
-//   );
-// }
-
-  
   getPages(page:number){
     let headers={
       headers:new HttpHeaders({

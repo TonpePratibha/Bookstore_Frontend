@@ -45,17 +45,7 @@ export class UserService {
   }
 
 
-  // ResetPassword(reqData:any,token:string){
 
-  //   let headers = {
-  //     headers: new HttpHeaders({ 
-  //       'Content-Type': 'application/json' ,
-  //       'Authorization':`Bearer${token}`
-  //     })
-  //   };
-  //   return this.http.PostService('https://localhost:7264/api/user/reset-password', reqData, true, headers);
-
-  // }
 
   ResetPassword(resetData: any, token: string) {
     const headers = new HttpHeaders({

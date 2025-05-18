@@ -130,7 +130,7 @@ setSortedBooks(data: any[]) {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.setPagedBooks();
-    // this.loadPageFromAPI();
+    
   
   }
 

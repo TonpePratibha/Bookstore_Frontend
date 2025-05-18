@@ -22,6 +22,7 @@ export class CartComponent implements OnInit{
   CustomerForm!: FormGroup;
   addressPanelOpen = false;
   summeryPanelOpen =false;
+   isLoading = true;
 
   constructor(private cartService:CartService,private sharedservice:SharedService,private orderservice:OrderService,
     private formbuilder:FormBuilder,private snackbar:MatSnackBar,private router :Router,private snackBar:MatSnackBar,private changedetector:ChangeDetectorRef){}
@@ -45,30 +46,35 @@ ngOnInit(): void {
 }
 
 
-
-
-
-
-
-
-  fetchCartItems() {
-    this.cartService.getCart().subscribe(
-      (response: any) => {
-        console.log('Cart summary:', response);
   
-       this.cartItems = response.items;   
-           //this.cartItems = [...response.items];         // Items in the cart
-          
-        this.totalQuantity = response.totalQuantity;
-        this.totalCost = response.totalCost;
-        this.changedetector.detectChanges();
-       
-      },
-      (error) => {
-        console.error('Error fetching cart:', error);
+  fetchCartItems() {
+  this.isLoading = true;
+  this.cartService.getCart().subscribe(
+    (response: any) => {
+      console.log('Cart summary:', response);
+
+      this.cartItems = response.items;
+      this.totalQuantity = response.totalQuantity;
+      this.totalCost = response.totalCost;
+      this.isLoading = false;
+      this.changedetector.detectChanges();
+    },
+    (error) => {
+      console.error('Error fetching cart:', error);
+
+      // Handle empty cart (404 error)
+      if (error.status === 404) {
+        this.cartItems = [];
+        this.totalQuantity = 0;
+        this.totalCost = 0;
       }
-    );
-  }
+
+      this.isLoading = false;
+      this.changedetector.detectChanges();
+    }
+  );
+}
+
 
   increaseQuantity(item: any) {
     const newQuantity = item.quantity + 1;
@@ -92,8 +98,8 @@ ngOnInit(): void {
       this.cartService.updateCart(item.bookId, newQuantity).subscribe(
         (response) => {
           console.log('Quantity decreased or item removed:', response);
-          // this.sharedservice.triggerCartRefresh();
-          // this.sharedservice.updateCartCountFromBackend();
+           this.sharedservice.triggerCartRefresh();
+           this.sharedservice.updateCartCountFromBackend();
           this.fetchCartItems();
           //  this.router.navigate(['/dashboard/cart']);
        
@@ -177,7 +183,8 @@ removeItem(bookId: number): void {
       next: (response) => {
         console.log('Item removed successfully:', response);
         
-      //  this.sharedservice.triggerCartRefresh();
+        this.sharedservice.triggerCartRefresh();
+         this.sharedservice.updateCartCountFromBackend();
         this.fetchCartItems();
         
        

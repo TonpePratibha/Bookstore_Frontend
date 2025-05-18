@@ -22,18 +22,23 @@ private firstname:string='';
  constructor(private cartService:CartService){}
 
 
-setFirstname(name:string){
-  this.firstname=name;
-   localStorage.setItem('firstname', name);
-}
-getFirstName():string{
-if (!this.firstname) {
-      this.firstname = localStorage.getItem('firstname') || '';
-    }
-    return this.firstname;
-  
+
+setFirstname(name: string) {
+  const capitalized = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  this.firstname = capitalized;
+  localStorage.setItem('firstname', capitalized);
 }
 
+
+
+
+getFirstName(): string {
+  if (!this.firstname) {
+    const stored = localStorage.getItem('firstname') || '';
+    this.firstname = stored.charAt(0).toUpperCase() + stored.slice(1).toLowerCase();
+  }
+  return this.firstname;
+}
 
  
   

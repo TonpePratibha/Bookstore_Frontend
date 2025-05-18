@@ -13,14 +13,14 @@
     </div>
 
     <div class="order-list">
-      <div class="order-card" *ngFor="let order of ordersArray">
+      <div class="order-card" *ngFor="let order of pagedBooks">
         <div class="book-image">
           <img [src]="order.bookImage" alt="Book cover" />
         </div>
         <div class="book-details">
           <h3>{{ order.bookName }}</h3>
           <p class="author">by {{ order.author }}</p>
-          <p class="quantity">{{ order.quantity }}</p>
+          <p class="quantity">quantity- <span class="qty">{{ order.quantity }} </span></p>
           <p class="price">
             Rs. {{ order.totalPrice }}
             <!-- <span class="original-price">Rs.{{ order.originalPrice || order.price + 500 }}</span> -->
@@ -33,3 +33,19 @@
     </div>
   </div>
   
+
+  <div class="paginator-wrapper">
+    <div class="pagination-container">
+      <button class="arrow-btn" [disabled]="currentPage === 0" (click)="goToPreviousPage()">&lt;</button>
+
+      <button
+        class="page-btn"
+        *ngFor="let page of getPageNumbers(); let i = index"
+        [class.active]="currentPage === i"
+        (click)="goToPage(i)">
+        {{ i + 1 }}
+      </button>
+
+      <button class="arrow-btn" [disabled]="currentPage >= maxPage - 1" (click)="goToNextPage()">&gt;</button>
+    </div>
+  </div>
