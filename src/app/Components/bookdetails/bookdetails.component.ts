@@ -83,22 +83,40 @@ addToBag() {
 }
 
 
-addTowishlist() {
+// addTowishlist() {
   
+//   this.wishlistservice.addToWishlist(this.book.id).subscribe({
+//     next: (res) => {
+//       this.snackBar.open("Book added to wishlist!", '', { duration: 2000 });
+//        this.router.navigate(['/dashboard/wishlist']);
+//        console.log("added to wishlist")
+//     },
+//     error: (err) => {
+//       console.error("Error adding to wishlist:", err);
+//       this.snackBar.open("Failed to add to wishlist", '', { duration: 2000 });
+//     }
+//   });
+// }
+
+
+addTowishlist() {
   this.wishlistservice.addToWishlist(this.book.id).subscribe({
     next: (res) => {
       this.snackBar.open("Book added to wishlist!", '', { duration: 2000 });
-       this.router.navigate(['/dashboard/wishlist']);
-       console.log("added to wishlist")
+      this.router.navigate(['/dashboard/wishlist']);
     },
     error: (err) => {
-      console.error("Error adding to wishlist:", err);
-      this.snackBar.open("Failed to add to wishlist", '', { duration: 2000 });
+      const errorMessage = err?.error?.message?.toLowerCase() || '';
+
+      if (err.status === 400 && errorMessage.includes("already present")) {
+        this.snackBar.open("Book is already in your wishlist!", '', { duration: 2000 });
+      } else {
+        console.error("Error adding to wishlist:", err);
+        this.snackBar.open("Failed to add to wishlist", '', { duration: 2000 });
+      }
     }
   });
 }
-
-
 
 
 

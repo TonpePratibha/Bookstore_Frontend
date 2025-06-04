@@ -113,9 +113,7 @@ ngOnInit(): void {
     }
   }
   
-trackByBookId(index: number, item: any): number {
-  return item.bookId;
-}
+
 
 
   
